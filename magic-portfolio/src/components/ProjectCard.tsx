@@ -8,11 +8,16 @@ import {
   Heading,
   SmartLink,
   Text,
+  TiltFx,
+  Card,
+  Badge,
+  HoloFx,
 } from "@once-ui-system/core";
 
 interface ProjectCardProps {
   href: string;
   priority?: boolean;
+  featured?: boolean;
   images: string[];
   title: string;
   content: string;
@@ -23,6 +28,7 @@ interface ProjectCardProps {
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   href,
+  featured = false,
   images = [],
   title,
   content,
@@ -31,23 +37,48 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   link,
 }) => {
   return (
-    <Column fillWidth gap="m">
-      <Carousel
-        sizes="(max-width: 960px) 100vw, 960px"
-        items={images.map((image) => ({
-          slide: image,
-          alt: title,
-        }))}
-        radius="l"
-      />
-      <Flex
-        mobileDirection="column"
+    <TiltFx aspectRatio={16/9} radius="l">
+      <Card
         fillWidth
-        paddingX="s"
-        paddingTop="12"
-        paddingBottom="24"
-        gap="l"
+        radius="l"
+        background="surface"
+        border="neutral-alpha-medium"
       >
+        {featured && (
+          <HoloFx
+            border="brand-alpha-weak"
+            radius="m"
+            shine={{ opacity: 30 }}
+            burn={{ opacity: 30 }}
+            style={{
+              position: "absolute",
+              top: 16,
+              right: 16,
+              zIndex: 10
+            }}
+          >
+            <Badge>
+              Featured
+            </Badge>
+          </HoloFx>
+        )}
+        <Column fillWidth gap="m">
+          <Carousel
+            sizes="(max-width: 960px) 100vw, 960px"
+            items={images.map((image) => ({
+              slide: image,
+              alt: title,
+            }))}
+            radius="l"
+          />
+          <Flex
+            mobileDirection="column"
+            fillWidth
+            paddingX="l"
+            paddingTop="12"
+            paddingBottom="24"
+            gap="l"
+          >
         {title && (
           <Flex flex={5}>
             <Heading as="h2" wrap="balance" variant="heading-strong-xl">
@@ -87,5 +118,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         )}
       </Flex>
     </Column>
+      </Card>
+    </TiltFx>
   );
 };

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Grid, Card, Heading, Text, Column } from "@once-ui-system/core";
+import { Grid, Card, Heading, Text, Column, RevealFx, Row, Icon } from "@once-ui-system/core";
 
 const metrics = [
   { label: "Healthcare Lives Impacted", value: 50000, suffix: "+" },
@@ -45,23 +45,26 @@ export function AnimatedMetrics() {
   if (!isVisible) {
     return (
       <Grid columns="4" gap="m" fillWidth>
-        {metrics.map((metric) => (
-          <Card 
-            key={metric.label} 
-            padding="l" 
-            background="neutral-alpha-weak"
-            className="metric-card glass-effect"
-            style={{ minHeight: '120px' }}
-            radius="l"
-            border="neutral-alpha-medium"
+        {metrics.map((metric, index) => (
+          <RevealFx
+            key={metric.label}
+            translateY="16"
+            delay={index * 0.1}
           >
-            <Column gap="xs">
-              <div className="loading" style={{ height: '40px' }} />
-              <Text variant="label-default-s" onBackground="neutral-weak">
-                {metric.label}
-              </Text>
-            </Column>
-          </Card>
+            <Card 
+              padding="l" 
+              background="surface"
+              radius="l"
+              border="neutral-alpha-weak"
+            >
+              <Column gap="s">
+                <div className="loading" style={{ height: '40px', width: '60%' }} />
+                <Text variant="label-default-s" onBackground="neutral-weak">
+                  {metric.label}
+                </Text>
+              </Column>
+            </Card>
+          </RevealFx>
         ))}
       </Grid>
     );
@@ -70,36 +73,33 @@ export function AnimatedMetrics() {
   return (
     <Grid columns="4" gap="m" fillWidth>
       {metrics.map((metric, index) => (
-        <Card 
-          key={metric.label} 
-          padding="l" 
-          background="neutral-alpha-weak"
-          className="metric-card glass-effect"
-          style={{ minHeight: '120px' }}
-          radius="l"
-          border="neutral-alpha-medium"
+        <RevealFx
+          key={metric.label}
+          translateY="16"
+          delay={index * 0.1}
         >
-          <Column gap="xs">
-            <Heading 
-              variant="display-strong-m" 
-              className="metric-number"
-              style={{ 
-                fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
-                lineHeight: '1.2',
-                fontWeight: '700'
-              }}
-            >
-              {Math.floor(counts[index]).toLocaleString()}{metric.suffix}
-            </Heading>
-            <Text 
-              variant="label-default-s" 
-              onBackground="neutral-weak"
-              style={{ fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)' }}
-            >
-              {metric.label}
-            </Text>
-          </Column>
-        </Card>
+          <Card 
+            padding="l" 
+            background="surface"
+            radius="l"
+            border="neutral-alpha-weak"
+          >
+            <Column gap="s">
+              <Heading 
+                variant="display-strong-m" 
+                className="tabular-nums"
+              >
+                {Math.floor(counts[index]).toLocaleString()}{metric.suffix}
+              </Heading>
+              <Text 
+                variant="label-default-s" 
+                onBackground="neutral-weak"
+              >
+                {metric.label}
+              </Text>
+            </Column>
+          </Card>
+        </RevealFx>
       ))}
     </Grid>
   );

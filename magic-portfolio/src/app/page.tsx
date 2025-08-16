@@ -12,7 +12,10 @@ import {
   Meta, 
   Schema,
   Grid,
-  Card
+  Card,
+  LetterFx,
+  Particle,
+  Background
 } from "@once-ui-system/core";
 import { home, about, person, newsletter, baseURL, routes } from "@/resources";
 import { Mailchimp } from "@/components";
@@ -38,7 +41,7 @@ export default function Home() {
         }}
       />
       
-      {/* Hero Section - Works great in both light/dark */}
+      {/* Hero Section - Enhanced with Once UI effects */}
       <Column 
         fillWidth 
         gap="l"
@@ -52,8 +55,23 @@ export default function Home() {
           minHeight: "calc(100vh - 160px)"
         }}
       >
-        {/* Animated Background Mesh */}
-        <div className="animated-mesh" />
+        {/* Interactive Particle Background - Replaces animated mesh */}
+        <Particle
+          fill
+          interactive
+          speed={3}
+          density={200}
+          color="brand-background-strong"
+          interactionRadius={100}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 0
+          }}
+        />
         
         <Column fillWidth maxWidth="l" horizontal="center" style={{ position: "relative", zIndex: 1 }}>
           {home.featured.display && (
@@ -74,14 +92,19 @@ export default function Home() {
           )}
           
           <RevealFx translateY="4" fillWidth horizontal="center" paddingBottom="16">
-            <Heading 
-              wrap="balance" 
-              variant="display-strong-l"
-              className="gradient-text hero-title"
-              align="center"
+            <LetterFx 
+              speed="medium" 
+              trigger="instant"
             >
-              {home.headline}
-            </Heading>
+              <Heading 
+                wrap="balance" 
+                variant="display-strong-l"
+                className="gradient-text hero-title"
+                align="center"
+              >
+                {home.headline}
+              </Heading>
+            </LetterFx>
           </RevealFx>
           
           <RevealFx translateY="8" delay={0.2} fillWidth horizontal="center" paddingBottom="32">
@@ -97,14 +120,14 @@ export default function Home() {
           </RevealFx>
           
           <RevealFx paddingTop="12" delay={0.4} horizontal="center">
-            <Flex gap="16">
+            <Row gap="m">
               <Button
                 id="work"
                 href="/work"
                 variant="primary"
                 size="l"
                 weight="strong"
-                className="button-3d"
+                arrowIcon
               >
                 View My Work
               </Button>
@@ -115,11 +138,10 @@ export default function Home() {
                 size="l"
                 weight="default"
                 arrowIcon
-                className="glass-effect"
               >
                 About Me
               </Button>
-            </Flex>
+            </Row>
           </RevealFx>
         </Column>
       </Column>
