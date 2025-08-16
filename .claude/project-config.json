@@ -1,0 +1,155 @@
+{
+  "template": "portfolio-website",
+  "agents_installed": [
+  "business-analyst",
+  "code-reviewer",
+  "content-marketer",
+  "deployment-engineer",
+  "docs-architect",
+  "frontend-developer",
+  "once-ui-expert",
+  "performance-engineer",
+  "reference-builder",
+  "search-specialist",
+  "security-auditor",
+  "test-automator",
+  "typescript-pro",
+  "ui-ux-designer"
+],
+  "setup_date": "2025-08-16T00:23:17Z",
+  "template_config": {
+  "name": "Portfolio Website",
+  "description": "Professional portfolio website with Once UI System, optimized for showcasing expertise in AI, healthcare, and algorithmic trading",
+  "phases": {
+    "brand_strategy": {
+      "description": "Personal branding and portfolio strategy optimization",
+      "agents": [
+        "business-analyst",
+        "ui-ux-designer",
+        "content-marketer"
+      ],
+      "deliverables": [
+        "Personal brand analysis and positioning",
+        "Portfolio effectiveness metrics",
+        "Content strategy for professional domains",
+        "User journey optimization for potential clients/employers"
+      ]
+    },
+    "frontend_excellence": {
+      "description": "Advanced frontend development with Once UI System mastery",
+      "agents": [
+        "once-ui-expert",
+        "frontend-developer",
+        "typescript-pro"
+      ],
+      "deliverables": [
+        "Once UI System component optimization",
+        "TypeScript type safety and performance",
+        "Responsive design with mobile-first approach",
+        "Animation and interaction effects",
+        "Component library documentation"
+      ]
+    },
+    "content_optimization": {
+      "description": "Technical content and project showcase optimization",
+      "agents": [
+        "docs-architect",
+        "search-specialist",
+        "reference-builder"
+      ],
+      "deliverables": [
+        "MDX content structure optimization",
+        "SEO-optimized project descriptions",
+        "Technical documentation and case studies",
+        "Portfolio navigation and discoverability",
+        "Meta tags and social sharing optimization"
+      ]
+    },
+    "performance_quality": {
+      "description": "Performance optimization and code quality assurance",
+      "agents": [
+        "performance-engineer",
+        "security-auditor",
+        "code-reviewer"
+      ],
+      "deliverables": [
+        "Core Web Vitals optimization",
+        "Image and asset optimization",
+        "Security audit and HTTPS implementation",
+        "Code quality metrics and best practices",
+        "Accessibility compliance (WCAG)"
+      ]
+    },
+    "production_deployment": {
+      "description": "Professional deployment and monitoring setup",
+      "agents": [
+        "deployment-engineer",
+        "test-automator"
+      ],
+      "deliverables": [
+        "CI/CD pipeline for portfolio updates",
+        "Automated testing for portfolio features",
+        "Domain setup and CDN configuration",
+        "Analytics and performance monitoring",
+        "Backup and recovery procedures"
+      ]
+    }
+  },
+  "recommended_stack": {
+    "frontend": ["Next.js 15", "React 19", "TypeScript", "Once UI System"],
+    "styling": ["CSS-in-JS", "Once UI Tokens", "Responsive Design", "Dark/Light Themes"],
+    "content": ["MDX", "Dynamic Content", "Blog Integration", "Project Showcases"],
+    "optimization": ["Image Optimization", "SEO", "Core Web Vitals", "Accessibility"],
+    "deployment": ["Vercel", "Custom Domain", "CDN", "Analytics"],
+    "special_features": ["RevealFx Animations", "Particle Effects", "TiltFx Cards", "LetterFx Typography", "Background Effects"]
+  },
+  "portfolio_domains": {
+    "primary": ["AI Development", "Healthcare Technology", "Algorithmic Trading"],
+    "secondary": ["Machine Learning", "Data Engineering", "Financial Technology"],
+    "showcase_types": ["Technical Projects", "Research Papers", "Case Studies", "Blog Posts", "Professional Achievements"]
+  },
+  "success_metrics": {
+    "performance": {
+      "lighthouse_score": "> 95",
+      "core_web_vitals": "All Green",
+      "loading_time": "< 2 seconds",
+      "image_optimization": "WebP/AVIF formats"
+    },
+    "seo": {
+      "seo_score": "> 95/100",
+      "meta_optimization": "Complete",
+      "structured_data": "Implemented",
+      "social_sharing": "Optimized"
+    },
+    "engagement": {
+      "bounce_rate": "< 40%",
+      "session_duration": "> 2 minutes",
+      "conversion_tracking": "Implemented",
+      "contact_form_optimization": "A/B tested"
+    },
+    "technical": {
+      "code_quality": "> 90%",
+      "type_safety": "100% TypeScript coverage",
+      "accessibility": "WCAG AA compliant",
+      "security": "Security audit passed"
+    }
+  },
+  "tier_configurations": {
+    "essential": {
+      "description": "Core portfolio development and optimization (6 agents)",
+      "agents": ["once-ui-expert", "frontend-developer", "typescript-pro", "performance-engineer", "search-specialist", "security-auditor"],
+      "ideal_for": "Individual developers building professional portfolios"
+    },
+    "professional": {
+      "description": "Complete professional portfolio with branding (10 agents)",
+      "agents": ["once-ui-expert", "frontend-developer", "typescript-pro", "performance-engineer", "search-specialist", "security-auditor", "ui-ux-designer", "business-analyst", "content-marketer", "docs-architect"],
+      "ideal_for": "Senior professionals and consultants"
+    },
+    "enterprise": {
+      "description": "Enterprise-level portfolio with advanced features (15 agents)",
+      "agents": ["once-ui-expert", "frontend-developer", "typescript-pro", "performance-engineer", "search-specialist", "security-auditor", "ui-ux-designer", "business-analyst", "content-marketer", "docs-architect", "code-reviewer", "test-automator", "deployment-engineer", "reference-builder", "mermaid-expert"],
+      "ideal_for": "CTOs, Tech Leads, and enterprise consultants"
+    }
+  }
+}
+}

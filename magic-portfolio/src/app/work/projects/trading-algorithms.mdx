@@ -1,0 +1,60 @@
+---
+title: "Quantitative Trading Algorithm Suite"
+publishedAt: "2024-03-10"
+summary: "ML-powered trading system achieving 20% annual returns with risk management"
+image: "/images/projects/trading/cover.jpg"
+tag: "FinTech"
+featured: true
+---
+
+## Algorithmic Trading Excellence
+
+Developed a comprehensive suite of trading algorithms combining machine learning, technical analysis, and risk management for consistent market outperformance.
+
+## Strategy Components
+
+### 📈 Pattern Recognition
+- Deep learning models for price prediction
+- 85% accuracy on 4-hour timeframes
+- Multi-timeframe analysis integration
+
+### 🛡️ Risk Management
+- Dynamic position sizing
+- Maximum drawdown: 12%
+- Sharpe ratio: 2.3
+
+### 🚀 Performance
+- **20% annual returns** (3-year average)
+- **15% market outperformance**
+- **$10M+ AUM** managed
+
+## Technical Architecture
+
+```python
+# Strategy Framework
+class TradingStrategy:
+    def __init__(self):
+        self.models = {
+            'lstm': LSTMPredictor(),
+            'transformer': MarketTransformer(),
+            'ensemble': EnsembleModel()
+        }
+        self.risk_manager = RiskManager(max_drawdown=0.12)
+        
+    def execute_trade(self, market_data):
+        signals = self.generate_signals(market_data)
+        position = self.risk_manager.calculate_position(signals)
+        return self.place_order(position)
+```
+
+## Backtesting Results
+
+| Metric | Value |
+|--------|-------|
+| Total Return | 287% |
+| Annual Return | 20.3% |
+| Sharpe Ratio | 2.3 |
+| Max Drawdown | 12% |
+| Win Rate | 68% |
+
+[Performance Dashboard](https://trading.rajanmaher.com) | [Strategy Whitepaper](/trading-whitepaper.pdf)

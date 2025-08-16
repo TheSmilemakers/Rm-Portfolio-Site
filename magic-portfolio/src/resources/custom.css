@@ -1,0 +1,419 @@
+/* Yellow/Orange/Sand Theme - Works for both Light and Dark modes */
+
+/* Once UI Compliant Enhancements */
+/* Using Once UI's existing token system and props */
+
+/* Enhanced 3D Button Effects - Works with Once UI Button component */
+.button-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+.button-3d::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--brand-solid-medium);
+  transform: translateZ(-4px) translateY(4px);
+  border-radius: inherit;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.button-3d:hover {
+  transform: translateY(-2px);
+}
+
+.button-3d:hover::before {
+  transform: translateZ(-2px) translateY(2px);
+}
+
+.button-3d:active {
+  transform: translateY(0);
+}
+
+.button-3d:active::before {
+  transform: translateZ(0) translateY(0);
+}
+
+/* Enhanced glassmorphism for translucent surfaces */
+/* This works with Once UI's surface="translucent" setting */
+.glass-effect {
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-effect:hover {
+  backdrop-filter: blur(16px) saturate(200%);
+  -webkit-backdrop-filter: blur(16px) saturate(200%);
+}
+
+/* Hero Section - Adaptive backgrounds */
+[data-theme="dark"] .hero-section {
+  background: linear-gradient(135deg, var(--page-background) 0%, var(--neutral-alpha-weak) 100%);
+}
+
+[data-theme="light"] .hero-section {
+  background: linear-gradient(135deg, var(--page-background) 0%, var(--neutral-alpha-weak) 100%);
+}
+
+/* Gradient text - Optimized for both themes */
+[data-theme="dark"] .gradient-text {
+  background: linear-gradient(135deg, var(--brand-400) 0%, var(--accent-400) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+}
+
+[data-theme="light"] .gradient-text {
+  background: linear-gradient(135deg, var(--brand-600) 0%, var(--accent-600) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+}
+
+/* Hero Title */
+.hero-title {
+  font-size: clamp(2.5rem, 8vw, 4.5rem) !important;
+  line-height: 1.1 !important;
+  font-weight: 800 !important;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.1rem, 2vw, 1.4rem) !important;
+  line-height: 1.5 !important;
+}
+
+/* Animated Gradient Background */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animated-mesh {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+[data-theme="dark"] .animated-mesh {
+  background: linear-gradient(
+    -45deg,
+    var(--brand-alpha-weak),
+    var(--accent-alpha-weak),
+    transparent,
+    var(--brand-alpha-weak)
+  );
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+  opacity: 0.2;
+}
+
+[data-theme="light"] .animated-mesh {
+  background: linear-gradient(
+    -45deg,
+    var(--brand-alpha-weak),
+    var(--accent-alpha-weak),
+    transparent,
+    var(--brand-alpha-weak)
+  );
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+  opacity: 0.3;
+}
+
+
+/* Hover Lift Effect */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px var(--brand-alpha-weak);
+}
+
+[data-theme="light"] .hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px var(--brand-alpha-weak);
+}
+
+/* Tech Card Animation with Glassmorphism */
+.tech-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border-radius: var(--radius-l) !important;
+  background: var(--neutral-alpha-weak) !important;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--neutral-alpha-medium);
+  overflow: hidden;
+}
+
+[data-theme="dark"] .tech-card:hover {
+  background: var(--brand-alpha-weak) !important;
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--brand-alpha-medium);
+  box-shadow: 0 12px 24px var(--brand-alpha-weak);
+}
+
+[data-theme="light"] .tech-card:hover {
+  background: var(--brand-alpha-weak) !important;
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--brand-alpha-medium);
+  box-shadow: 0 12px 24px var(--brand-alpha-weak);
+}
+
+.tech-icon {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] .tech-icon {
+  color: var(--neutral-weak);
+}
+
+[data-theme="light"] .tech-icon {
+  color: var(--neutral-strong);
+}
+
+[data-theme="dark"] .tech-card:hover .tech-icon {
+  transform: scale(1.1);
+  color: var(--brand-400);
+}
+
+[data-theme="light"] .tech-card:hover .tech-icon {
+  transform: scale(1.1);
+  color: var(--brand-600);
+}
+
+/* Metric Card Animation */
+[data-theme="dark"] .metric-card {
+  border: 1px solid var(--neutral-alpha-weak);
+  background: var(--surface-background);
+  transition: all 0.3s ease;
+}
+
+[data-theme="light"] .metric-card {
+  border: 1px solid var(--neutral-alpha-weak);
+  background: var(--surface-background);
+  transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+  border-color: var(--brand-alpha-medium);
+  background: var(--brand-alpha-weak);
+}
+
+/* Metric Numbers */
+[data-theme="dark"] .metric-number {
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--brand-400) 0%, var(--accent-400) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="light"] .metric-number {
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--brand-600) 0%, var(--accent-600) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* CTA Card */
+.cta-card {
+  background: var(--brand-alpha-weak) !important;
+  border: 1px solid var(--brand-alpha-medium);
+}
+
+/* Glow Hover Effect */
+.glow-hover {
+  transition: all 0.3s ease;
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 20px var(--brand-alpha-medium);
+}
+
+/* Badge Styling */
+.badge-featured {
+  background: var(--accent-alpha-weak) !important;
+  border: 1px solid var(--accent-alpha-medium);
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+html[data-scroll-behavior="smooth"] {
+  scroll-behavior: smooth;
+}
+
+/* Loading Animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.loading {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  .gradient-text {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+  
+  .hero-title {
+    font-size: clamp(2rem, 7vw, 3.5rem) !important;
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(1rem, 1.8vw, 1.2rem) !important;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--neutral-alpha-weak);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: var(--neutral-alpha-weak);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--brand-400);
+  border-radius: 4px;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: var(--brand-600);
+  border-radius: 4px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-500);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-700);
+}
+
+/* Space Grotesk specific adjustments */
+.font-heading {
+  letter-spacing: -0.02em;
+}
+
+/* Roboto Slab specific adjustments for labels */
+.font-label {
+  letter-spacing: 0.01em;
+}
+
+/* Main container responsive adjustments */
+.main-container {
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 16px;  /* Base mobile padding */
+  padding-right: 16px;
+}
+
+/* Small screens and up */
+@media (min-width: 768px) {
+  .main-container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+/* Medium screens and up */
+@media (min-width: 1024px) {
+  .main-container {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+/* Large screens and up */
+@media (min-width: 1440px) {
+  .main-container {
+    padding-left: max(80px, 5vw);
+    padding-right: max(80px, 5vw);
+  }
+}
+
+/* Ultra-wide screens */
+@media (min-width: 1920px) {
+  .main-container {
+    padding-left: max(120px, 8vw);
+    padding-right: max(120px, 8vw);
+  }
+}
+
+@media (min-width: 2560px) {
+  .main-container {
+    padding-left: max(160px, 10vw);
+    padding-right: max(160px, 10vw);
+  }
+}
+
+/* Dark mode specific enhancements for sand/yellow/orange theme */
+[data-theme="dark"] {
+  /* Warm dark theme with sand undertones */
+  --page-background-override: #1a1816; /* Slightly warm dark */
+}
+
+/* Ensure good contrast in dark mode with sand palette */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4 {
+  color: var(--neutral-weak) !important;
+}
+
+[data-theme="dark"] .hero-subtitle {
+  color: var(--neutral-weak) !important;
+  opacity: 0.9;
+}
+
+/* Light mode enhancements */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4 {
+  color: var(--neutral-strong) !important;
+}
+
+[data-theme="light"] .hero-subtitle {
+  color: var(--neutral-strong) !important;
+  opacity: 0.8;
+}
