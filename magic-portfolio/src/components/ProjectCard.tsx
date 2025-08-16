@@ -37,13 +37,15 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   link,
 }) => {
   return (
-    <TiltFx aspectRatio={16/9} radius="l">
-      <Card
-        fillWidth
-        radius="l"
-        background="surface"
-        border="neutral-alpha-medium"
-      >
+    <Card
+      fillWidth
+      fillHeight
+      radius="l"
+      background="surface"
+      border="neutral-alpha-medium"
+      style={{ overflow: "hidden", display: "flex", flexDirection: "column" }}
+    >
+      <TiltFx fillWidth fillHeight style={{ display: "flex", flexDirection: "column", height: "100%" }}>
         {featured && (
           <HoloFx
             border="brand-alpha-weak"
@@ -62,22 +64,26 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             </Badge>
           </HoloFx>
         )}
-        <Column fillWidth gap="m">
-          <Carousel
-            sizes="(max-width: 960px) 100vw, 960px"
-            items={images.map((image) => ({
-              slide: image,
-              alt: title,
-            }))}
-            radius="l"
-          />
+        <Column fillWidth fillHeight gap="0" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+          <div style={{ aspectRatio: "16/9", width: "100%", position: "relative", flexShrink: 0 }}>
+            <Carousel
+              sizes="(max-width: 960px) 100vw, 960px"
+              items={images.map((image) => ({
+                slide: image,
+                alt: title,
+              }))}
+              radius="s"
+              style={{ height: "100%" }}
+            />
+          </div>
           <Flex
             mobileDirection="column"
             fillWidth
             paddingX="l"
-            paddingTop="12"
-            paddingBottom="24"
+            paddingTop="l"
+            paddingBottom="l"
             gap="l"
+            style={{ flex: "1", display: "flex", flexDirection: "column" }}
           >
         {title && (
           <Flex flex={5}>
@@ -87,14 +93,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           </Flex>
         )}
         {(avatars?.length > 0 || description?.trim() || content?.trim()) && (
-          <Column flex={7} gap="16">
+          <Column flex={7} gap="m" style={{ marginTop: "auto" }}>
             {avatars?.length > 0 && <AvatarGroup avatars={avatars} size="m" reverse />}
             {description?.trim() && (
               <Text wrap="balance" variant="body-default-s" onBackground="neutral-weak">
                 {description}
               </Text>
             )}
-            <Flex gap="24" wrap>
+            <Flex gap="l" wrap style={{ marginTop: "8" }}>
               {content?.trim() && (
                 <SmartLink
                   suffixIcon="arrowRight"
@@ -118,7 +124,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         )}
       </Flex>
     </Column>
-      </Card>
-    </TiltFx>
+      </TiltFx>
+    </Card>
   );
 };

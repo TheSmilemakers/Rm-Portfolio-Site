@@ -44,7 +44,13 @@ export function AnimatedMetrics() {
 
   if (!isVisible) {
     return (
-      <Grid columns="4" gap="m" fillWidth>
+      <Grid 
+      columns="4"
+      mobileColumns="1"
+      tabletColumns="2"
+      gap="l" 
+      fillWidth
+    >
         {metrics.map((metric, index) => (
           <RevealFx
             key={metric.label}
@@ -71,7 +77,13 @@ export function AnimatedMetrics() {
   }
 
   return (
-    <Grid columns="4" gap="m" fillWidth>
+    <Grid 
+      columns="4"
+      mobileColumns="1"
+      tabletColumns="2"
+      gap="l" 
+      fillWidth
+    >
       {metrics.map((metric, index) => (
         <RevealFx
           key={metric.label}

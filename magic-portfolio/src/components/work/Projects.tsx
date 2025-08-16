@@ -1,5 +1,5 @@
 import { getPosts } from "@/utils/utils";
-import { Column, RevealFx } from "@once-ui-system/core";
+import { Grid, RevealFx } from "@once-ui-system/core";
 import { ProjectCard } from "@/components";
 
 interface ProjectsProps {
@@ -18,7 +18,14 @@ export function Projects({ range }: ProjectsProps) {
     : sortedProjects;
 
   return (
-    <Column fillWidth gap="xl" marginBottom="40">
+    <Grid 
+      fillWidth 
+      columns="3"
+      mobileColumns="1"
+      tabletColumns="2"
+      gap="l"
+      marginBottom="40"
+    >
       {displayedProjects.map((post, index) => (
         <RevealFx
           key={post.slug}
@@ -38,6 +45,6 @@ export function Projects({ range }: ProjectsProps) {
           />
         </RevealFx>
       ))}
-    </Column>
+    </Grid>
   );
 }

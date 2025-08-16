@@ -129,14 +129,23 @@ export default async function RootLayout({
               <Column 
                 fillWidth 
                 className="main-container"
+                padding="0"
               >
                 <Header />
                 <Column
                   as="main"
                   fillWidth
-                  paddingBottom="xl"
-                  gap="l">
-                  {children}
+                  horizontal="center"
+                  paddingX="xl"
+                >
+                  <Column
+                    fillWidth
+                    maxWidth="xl"
+                    gap="l"
+                    paddingBottom="xl"
+                  >
+                    {children}
+                  </Column>
                 </Column>
                 <Footer />
               </Column>
