@@ -45,12 +45,12 @@ export function AnimatedMetrics() {
   if (!isVisible) {
     return (
       <Grid 
-      columns="4"
-      mobileColumns="1"
-      tabletColumns="2"
-      gap="l" 
-      fillWidth
-    >
+        columns="4"
+        mobileColumns="1"
+        tabletColumns="2"
+        gap="l"
+        fillWidth
+      >
         {metrics.map((metric, index) => (
           <RevealFx
             key={metric.label}
@@ -58,10 +58,11 @@ export function AnimatedMetrics() {
             delay={index * 0.1}
           >
             <Card 
-              padding="l" 
+              padding="l"
               background="surface"
               radius="l"
               border="neutral-alpha-weak"
+              fillWidth
             >
               <Column gap="s">
                 <div className="loading" style={{ height: '40px', width: '60%' }} />
@@ -81,7 +82,7 @@ export function AnimatedMetrics() {
       columns="4"
       mobileColumns="1"
       tabletColumns="2"
-      gap="l" 
+      gap="l"
       fillWidth
     >
       {metrics.map((metric, index) => (
@@ -91,20 +92,21 @@ export function AnimatedMetrics() {
           delay={index * 0.1}
         >
           <Card 
-            padding="l" 
+            padding="l"
             background="surface"
             radius="l"
             border="neutral-alpha-weak"
+            fillWidth
           >
             <Column gap="s">
               <Heading 
-                variant="display-strong-m" 
+                variant="display-strong-m"
                 className="tabular-nums"
               >
                 {Math.floor(counts[index]).toLocaleString()}{metric.suffix}
               </Heading>
               <Text 
-                variant="label-default-s" 
+                variant="label-default-s"
                 onBackground="neutral-weak"
               >
                 {metric.label}

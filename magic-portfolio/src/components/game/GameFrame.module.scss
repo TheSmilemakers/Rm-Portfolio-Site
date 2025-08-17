@@ -1,0 +1,189 @@
+@use "../../components/breakpoints.scss" as breakpoints;
+
+.gameContainer {
+  width: 100%;
+  position: relative;
+}
+
+.gameCard {
+  overflow: hidden;
+  position: relative;
+  
+  &[data-game-theme="cyberpunk"] {
+    // Subtle cyberpunk glow effect
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(0, 255, 204, 0.2) 50%,
+        transparent 70%
+      );
+      border-radius: var(--radius-l);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    &:hover::before {
+      opacity: 1;
+    }
+  }
+}
+
+.loadingContainer {
+  background: var(--surface-background);
+}
+
+.gameWrapper {
+  position: relative;
+  width: 100%;
+  background: #000; // Black background for loading state
+}
+
+.gameIframe {
+  width: 100%;
+  border: none;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  background: #000;
+  
+  &.loaded {
+    opacity: 1;
+  }
+}
+
+.gameControls {
+  position: absolute;
+  top: var(--static-space-s);
+  right: var(--static-space-s);
+  background: rgba(var(--surface-background-rgb), 0.8);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-m);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  
+  .gameWrapper:hover & {
+    opacity: 1;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: breakpoints.$s) {
+  .gameCard {
+    border-radius: var(--radius-m);
+  }
+  
+  .gameIframe {
+    min-height: 600px !important;
+  }
+  
+  .gameControls {
+    opacity: 1; // Always show on mobile
+  }
+}
+
+// Fullscreen styles
+:fullscreen {
+  .gameIframe {
+    height: 100vh;
+    width: 100vw;
+  }
+}
+
+// Storyline styles
+.storylineCard {
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(0, 255, 204, 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 80% 50%, rgba(255, 170, 0, 0.1) 0%, transparent 40%);
+    pointer-events: none;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(90deg, transparent 98%, rgba(0,255,204,0.02) 100%),
+      linear-gradient(180deg, transparent 98%, rgba(0,255,204,0.02) 100%);
+    background-size: 20px 20px;
+    animation: scanlines 2s linear infinite;
+    pointer-events: none;
+  }
+}
+
+@keyframes scanlines { 
+  0% { background-position: 0 0; } 
+  100% { background-position: 0 20px; } 
+}
+
+.year {
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px currentColor;
+}
+
+.sector {
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.storyText {
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+.missionText {
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+  padding-top: var(--static-space-m);
+}
+
+.startButton {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(
+      45deg,
+      #00ffcc,
+      #00cc99,
+      #00ffcc
+    );
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    filter: blur(8px);
+  }
+  
+  &:hover::before {
+    opacity: 0.5;
+    animation: pulse 2s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}

@@ -95,6 +95,12 @@ export default async function RootLayout({
             `,
           }}
         />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="theme-color" content="#000000" />
       </head>
       <Providers>
         <Column as="body" background="page" fillWidth style={{minHeight: "100vh", position: "relative"}} margin="0" padding="0">
@@ -126,26 +132,15 @@ export default async function RootLayout({
           {/* Content layer */}
           <Column fillWidth style={{minHeight: "100vh", position: "relative", zIndex: 1}}>
             <RouteGuard>
-              <Column 
-                fillWidth 
-                className="main-container"
-                padding="0"
-              >
+              <Column fillWidth>
                 <Header />
                 <Column
                   as="main"
                   fillWidth
                   horizontal="center"
-                  paddingX="xl"
+                  style={{ flexGrow: 1 }}
                 >
-                  <Column
-                    fillWidth
-                    maxWidth="xl"
-                    gap="l"
-                    paddingBottom="xl"
-                  >
-                    {children}
-                  </Column>
+                  {children}
                 </Column>
                 <Footer />
               </Column>

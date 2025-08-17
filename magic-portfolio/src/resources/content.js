@@ -7,7 +7,7 @@ const person = {
     return `${this.firstName} ${this.lastName}`;
   },
   role: "Digital Craftsman",
-  avatar: "/images/rajan-avatar.svg", // Using SVG placeholder for now
+  avatar: "/images/rajan-avatar.jpg", // Updated to use processed JPG
   email: "hello@rajanmaher.com",
   location: "Europe/London",
   languages: ["English"], 
@@ -215,4 +215,12 @@ const gallery = {
   ],
 };
 
-export { person, social, newsletter, home, about, blog, work, gallery };
+const game = {
+  path: "/game",
+  label: "Play",
+  title: `Galactic Hustle – ${person.name}`,
+  description: "Space trading game showcasing strategic gameplay and AI decision-making",
+  image: "/images/og/game.jpg",
+};
+
+export { person, social, newsletter, home, about, blog, work, gallery, game };

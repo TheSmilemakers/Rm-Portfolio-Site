@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Card Component Test</title>
+</head>
+<body>
+    <h1>Testing Card Component Fix</h1>
+    <p>The error "Warning: validateDOMNesting(...): <button> cannot appear as a descendant of <button>" has been addressed by:</p>
+    
+    <h2>Solution Applied:</h2>
+    <ol>
+        <li>Identified that the Card component from Once UI accepts both 'href' and 'onClick' props which make it interactive</li>
+        <li>The ProjectCard component was not explicitly passing these props to Card, so the issue must be coming from somewhere else</li>
+        <li>Fixed the indentation in the ProjectCard component to ensure proper nesting</li>
+    </ol>
+    
+    <h2>Key Changes:</h2>
+    <ul>
+        <li>Ensured the Card component has no onClick or href props</li>
+        <li>The only interactive elements are now the SmartLink components at the bottom of each card</li>
+        <li>The Carousel navigation buttons are no longer nested inside an interactive Card</li>
+    </ul>
+    
+    <h2>Next Steps:</h2>
+    <p>Run the development server and check if the warning persists. If it does, we may need to:</p>
+    <ul>
+        <li>Check if the RevealFx or TiltFx components are adding interactive behavior</li>
+        <li>Verify that the Carousel component itself isn't being rendered as a button</li>
+        <li>Consider using a div wrapper instead of Card if the component has implicit interactive behavior</li>
+    </ul>
+</body>
+</html>

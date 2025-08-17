@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Galactic Hustle</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Orbitron', monospace;
+      background: #000; color: #00ffcc;
+      padding: 0; margin: 0; min-height: 100vh;
+      background-image:
+        linear-gradient(90deg, transparent 98%, rgba(0,255,204,0.03) 100%),
+        linear-gradient(180deg, transparent 98%, rgba(0,255,204,0.03) 100%);
+      background-size: 20px 20px;
+      animation: scanlines 2s linear infinite;
+    }
+    @keyframes scanlines { 0%{background-position:0 0} 100%{background-position:0 20px} }
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+    h1 { text-align: center; font-size: 3em; font-weight: 900; margin: 20px 0;
+      text-shadow: 0 0 10px #00ffcc,0 0 20px #00ffcc,0 0 30px #00ffcc; letter-spacing: 3px; animation: glow 2s ease-in-out infinite alternate; }
+    @keyframes glow { from{ text-shadow: 0 0 10px #00ffcc,0 0 20px #00ffcc,0 0 30px #00ffcc } to{ text-shadow: 0 0 5px #00ffcc,0 0 10px #00ffcc,0 0 15px #00ffcc } }
+
+    .panel { background: linear-gradient(135deg, rgba(0,20,30,0.9), rgba(0,10,20,0.9));
+      border: 2px solid #00ffcc; border-radius: 10px; margin-bottom: 20px; padding: 20px;
+      box-shadow: inset 0 1px 0 rgba(0,255,204,0.2), 0 0 20px rgba(0,255,204,0.1);
+      backdrop-filter: blur(5px); position: relative; overflow: hidden; }
+    .panel::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0,255,204,0.1), transparent); animation: sweep 3s ease-in-out infinite; }
+    @keyframes sweep { 0%{left:-100%} 50%{left:100%} 100%{left:100%} }
+    .panel h3 { margin-top: 0; color: #00ffcc; font-weight: 700; font-size: 1.2em; text-transform: uppercase; letter-spacing: 2px;
+      border-bottom: 1px solid rgba(0,255,204,0.3); padding-bottom: 10px; }
+
+    button {
+      background: linear-gradient(145deg, #1a3a3a, #0d2a2a); color:#00ffcc; border:1px solid #00ffcc;
+      padding:10px 15px; margin:3px; border-radius:5px; cursor:pointer; font-family:'Orbitron', monospace;
+      text-transform: uppercase; letter-spacing:1px; transition: all .3s ease; position: relative; overflow: hidden;
+    }
+    button::before { content:''; position:absolute; top:50%; left:50%; width:0; height:0; background:rgba(0,255,204,.2);
+      border-radius:50%; transform:translate(-50%,-50%); transition: all .3s ease; }
+    button:hover { background: linear-gradient(145deg, #00ffcc, #00cc99); color:#000; box-shadow:0 0 15px rgba(0,255,204,.5); transform: translateY(-2px); }
+    button:hover::before { width:100%; height:100%; }
+    button:active { transform: translateY(0); }
+    button:disabled { background: linear-gradient(145deg,#333,#222); color:#666; cursor:not-allowed; box-shadow:none; }
+
+    input[type="number"] {
+      background: rgba(0,20,30,.8); color:#00ffcc; border:1px solid #00ffcc; padding:8px; width:70px; border-radius:5px;
+      font-family:'Orbitron', monospace; text-align:center;
+    }
+    input[type="number"]:focus { outline:none; box-shadow:0 0 10px rgba(0,255,204,.5); border-color:#00ffcc; }
+
+    .status-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:15px; }
+    .status-item { background: rgba(0,255,204,.1); padding:15px; border-radius:8px; border-left:4px solid #00ffcc; }
+    .status-label { font-size:.8em; opacity:.7; text-transform:uppercase; letter-spacing:1px; }
+    .status-value { font-size:1.3em; font-weight:700; margin-top:5px; }
+
+    .trade-row { display:flex; align-items:center; justify-content:space-between; margin:10px 0; padding:12px;
+      background: rgba(0,255,204,.05); border-radius:8px; border:1px solid rgba(0,255,204,.2); }
+    .trade-item { flex:1; font-weight:600; }
+    .trade-controls { display:flex; align-items:center; gap:8px; }
+
+    .upgrade-item { margin:12px 0; padding:15px; background: linear-gradient(135deg, rgba(0,255,204,.1), rgba(0,200,150,.1));
+      border-radius:8px; border:1px solid rgba(0,255,204,.3); }
+    .upgrade-name { font-weight:700; font-size:1.1em; }
+    .upgrade-level { color:#ffaa00; font-weight:600; }
+
+    #log { background: rgba(0,0,0,.9); border:2px solid #00ffcc; height:200px; overflow-y:auto; border-radius:10px;
+      white-space:pre-line; font-family:'Courier New', monospace; font-size:.9em; line-height:1.4; }
+
+    .market-intel { background: linear-gradient(135deg, rgba(0,100,80,.2), rgba(0,150,120,.2));
+      padding:15px; margin:12px 0; border-radius:8px; border-left:4px solid #00ffcc; border-right:4px solid #00ffcc; }
+    .profit-positive { color:#00ff88; font-weight:600; }
+    .profit-negative { color:#ff4444; font-weight:600; }
+
+    .travel-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap:10px; }
+    .travel-button { padding:15px; font-size:1em; background: linear-gradient(145deg, #2a4a5a, #1a3a4a); }
+
+    .ascii-art { font-family:'Courier New', monospace; font-size:.7em; opacity:.3; text-align:center; margin:10px 0; line-height:1; }
+
+    .two-column { display:grid; grid-template-columns: 1fr 1fr; gap:20px; }
+    @media (max-width:768px){ .two-column{grid-template-columns:1fr} .status-grid{grid-template-columns:1fr} h1{font-size:2em} }
+
+    ::-webkit-scrollbar{ width:8px } ::-webkit-scrollbar-track{ background:rgba(0,0,0,.5) }
+    ::-webkit-scrollbar-thumb{ background:#00ffcc; border-radius:4px } ::-webkit-scrollbar-thumb:hover{ background:#00cc99 }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚀 GALACTIC HUSTLE</h1>
+
+    <div class="ascii-art">▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲ ▲</div>
+
+    <div id="status" class="panel"></div>
+
+    <div class="two-column">
+      <div>
+        <div class="panel">
+          <h3>🛒 Trading Terminal</h3>
+          <div id="trading"></div>
+        </div>
+        <div class="panel">
+          <h3>🔧 Ship Upgrades</h3>
+          <div id="upgrades"></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="panel">
+          <h3>📊 Market Intelligence</h3>
+          <div id="intel"></div>
+        </div>
+        <div class="panel">
+          <h3>🚀 Hyperspace Navigation</h3>
+          <div id="travel"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>📡 System Log</h3>
+      <div id="log"></div>
+      <div style="margin-top:10px;">
+        <button id="restartBtn" onclick="restartGame()">Restart</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ---------- Game State ----------
+    let gameState = {
+      day: 1,
+      credits: 1000,
+      cargoSpace: 10,
+      cargo: {},
+      maxDays: 30,
+      location: "Terra Prime",
+      upgrades: { cargoExpansion: 0, engines: 0, shields: 0, scanner: 0 },
+      marketIntel: {},
+      isGameOver: false
+    };
+
+    const goods = {
+      "Ore": [50, 150],
+      "Water": [10, 50],
+      "Fuel": [100, 300],
+      "AI Cores": [500, 1200],
+      "Alien Artifacts": [800, 2000],
+      "Medical Supplies": [200, 600]
+    };
+
+    const planets = ["Terra Prime", "Zorath", "Lunaris", "Vega IX", "Orion Station"];
+    let prices = {};
+
+    const upgradeData = {
+      cargoExpansion: { name: "Cargo Bay Expansion", baseCost: 500, description: "+5 cargo space", icon: "📦" },
+      engines:        { name: "Quantum Engines",      baseCost: 800, description: "Enhanced propulsion", icon: "⚡" },
+      shields:        { name: "Defense Matrix",       baseCost: 1000,description: "Pirate protection",   icon: "🛡️" },
+      scanner:        { name: "Market Scanner",       baseCost: 600, description: "Cheaper intel",       icon: "📡" }
+    };
+
+    // ---------- Helpers ----------
+    const randInt = (min,max)=> Math.floor(Math.random()*(max-min+1))+min;
+
+    function generatePrices() {
+      prices = {};
+      for (const goodName in goods) {
+        const [lo, hi] = goods[goodName];
+        prices[goodName] = randInt(lo, hi);
+      }
+    }
+
+    function generatePricesForPlanet() {
+      const planetPrices = {};
+      for (const goodName in goods) {
+        const [lo, hi] = goods[goodName];
+        planetPrices[goodName] = randInt(lo, hi);
+      }
+      return planetPrices;
+    }
+
+    function addLog(message) {
+      const logDiv = document.getElementById("log");
+      const line = `[DAY ${Math.min(gameState.day, gameState.maxDays)}] ${message}\n`;
+      logDiv.textContent = line + logDiv.textContent;
+    }
+
+    function getTotalCargo() {
+      return Object.values(gameState.cargo).reduce((a,b)=>a+b,0);
+    }
+
+    function getMaxCargo() {
+      return gameState.cargoSpace + (gameState.upgrades.cargoExpansion * 5);
+    }
+
+    function getUpgradeCost(type) {
+      const base = upgradeData[type].baseCost;
+      const level = gameState.upgrades[type];
+      return Math.floor(base * Math.pow(1.5, level));
+    }
+
+    function getIntelCost() {
+      const base = 100;
+      const scannerLevel = gameState.upgrades.scanner;
+      return Math.max(25, base - (scannerLevel * 20));
+    }
+
+    function formatCredits(amount) {
+      return `${amount.toLocaleString()} CR`;
+    }
+
+    function safeQty(n) {
+      const x = Number(n);
+      return Number.isFinite(x) && x > 0 ? Math.floor(x) : 1;
+    }
+
+    function controlsDisabled() { return gameState.isGameOver; }
+
+    // ---------- Trading ----------
+    function buyGood(itemName, q) {
+      if (controlsDisabled()) return;
+      const quantity = safeQty(q);
+      const price = prices[itemName];
+      const totalCost = price * quantity;
+      const availableSpace = getMaxCargo() - getTotalCargo();
+
+      if (quantity > availableSpace) {
+        addLog(`⚠️ CARGO OVERFLOW: Need ${quantity} slots, only ${availableSpace} available`);
+        return;
+      }
+      if (gameState.credits < totalCost) {
+        addLog(`⚠️ INSUFFICIENT FUNDS: Need ${formatCredits(totalCost)}, have ${formatCredits(gameState.credits)}`);
+        return;
+      }
+      gameState.credits -= totalCost;
+      gameState.cargo[itemName] = (gameState.cargo[itemName] || 0) + quantity;
+      addLog(`✅ PURCHASE: ${quantity}x ${itemName} → ${formatCredits(totalCost)}`);
+      updateDisplay();
+    }
+
+    function sellGood(itemName, q) {
+      if (controlsDisabled()) return;
+      const quantity = safeQty(q);
+      const available = gameState.cargo[itemName] || 0;
+
+      if (available < quantity) {
+        addLog(`⚠️ INSUFFICIENT STOCK: Only ${available}x ${itemName} available`);
+        return;
+      }
+      const price = prices[itemName];
+      const totalRevenue = price * quantity;
+
+      gameState.cargo[itemName] = available - quantity;
+      if (gameState.cargo[itemName] === 0) delete gameState.cargo[itemName];
+
+      gameState.credits += totalRevenue;
+      addLog(`💰 SALE: ${quantity}x ${itemName} → +${formatCredits(totalRevenue)}`);
+      updateDisplay();
+    }
+
+    function buyUpgrade(type) {
+      if (controlsDisabled()) return;
+      const cost = getUpgradeCost(type);
+      if (gameState.credits >= cost) {
+        gameState.credits -= cost;
+        gameState.upgrades[type]++;
+        addLog(`🔧 UPGRADE: ${upgradeData[type].name} → Level ${gameState.upgrades[type]}`);
+        updateDisplay();
+      } else {
+        addLog(`⚠️ UPGRADE FAILED: Need ${formatCredits(cost)}`);
+      }
+    }
+
+    function buyIntel(planetName) {
+      if (controlsDisabled()) return;
+      const cost = getIntelCost();
+      if (gameState.credits >= cost) {
+        gameState.credits -= cost;
+        gameState.marketIntel[planetName] = generatePricesForPlanet();
+        addLog(`📡 INTEL ACQUIRED: ${planetName} market data (${formatCredits(cost)})`);
+        updateDisplay();
+      } else {
+        addLog(`⚠️ INTEL DENIED: Need ${formatCredits(cost)}`);
+      }
+    }
+
+    // ---------- Travel / Events ----------
+    function travel(destination) {
+      if (controlsDisabled()) return;
+      gameState.location = destination;
+      gameState.day++;
+      gameState.marketIntel = {};
+
+      const eventRoll = randInt(1, 10);
+      const shieldReduction = Math.min(0.75, gameState.upgrades.shields * 0.15); // cap 75%
+
+      if (eventRoll <= 2 && Math.random() > shieldReduction) {
+        const baseLoss = randInt(50, 200);
+        const actualLoss = Math.floor(baseLoss * (1 - shieldReduction));
+        gameState.credits = Math.max(0, gameState.credits - actualLoss);
+        addLog(`🏴‍☠️ PIRATES: Lost ${formatCredits(actualLoss)}${shieldReduction>0 ? " (shields mitigated)" : ""}`);
+      } else if (eventRoll === 3) {
+        const bonus = randInt(100, 300);
+        gameState.credits += bonus;
+        addLog(`💎 SALVAGE: Found derelict ship → +${formatCredits(bonus)}`);
+      } else if (eventRoll === 4) {
+        gameState.cargoSpace += 2;
+        addLog(`📦 DISCOVERY: Cargo expansion pod → +2 space`);
+      } else {
+        addLog(`🛸 ARRIVAL: Hyperspace jump to ${gameState.location} complete`);
+      }
+
+      generatePrices();
+      if (gameState.day > gameState.maxDays) {
+        endGame();
+      } else {
+        updateDisplay();
+      }
+    }
+
+    // ---------- UI ----------
+    function updateDisplay() {
+      // Status
+      const cargoText = getTotalCargo() > 0
+        ? Object.entries(gameState.cargo).map(([k,v])=>`${v}x ${k}`).join(" • ")
+        : "EMPTY";
+
+      document.getElementById("status").innerHTML =
+        `<h3>⚡ SHIP STATUS</h3>
+         <div class="status-grid">
+           <div class="status-item"><div class="status-label">Mission Day</div><div class="status-value">${gameState.day}/${gameState.maxDays}</div></div>
+           <div class="status-item"><div class="status-label">Current Location</div><div class="status-value">${gameState.location}</div></div>
+           <div class="status-item"><div class="status-label">Credits</div><div class="status-value">${formatCredits(gameState.credits)}</div></div>
+           <div class="status-item"><div class="status-label">Cargo Hold</div><div class="status-value">${getTotalCargo()}/${getMaxCargo()} units</div></div>
+         </div>
+         <div style="margin-top:15px;"><strong>CARGO:</strong> ${cargoText}</div>`;
+
+      // Trading
+      let tradingHTML = "";
+      for (const goodName in prices) {
+        const owned = gameState.cargo[goodName] || 0;
+        const goodId = goodName.replace(/\s/g,'_');
+        const disabled = controlsDisabled() ? 'disabled' : '';
+        tradingHTML += `
+          <div class="trade-row">
+            <div class="trade-item">
+              ${goodName}<br>
+              <span style="color:#ffaa00;">${formatCredits(prices[goodName])}</span>
+              <span style="opacity:.7;">(have: ${owned})</span>
+            </div>
+            <div class="trade-controls">
+              <input type="number" id="qty_${goodId}" value="1" min="1" max="999" ${disabled}>
+              <button ${disabled} onclick="buyGood('${goodName}', document.getElementById('qty_${goodId}').value)">BUY</button>
+              <button ${disabled} onclick="sellGood('${goodName}', document.getElementById('qty_${goodId}').value)">SELL</button>
+            </div>
+          </div>`;
+      }
+      document.getElementById("trading").innerHTML = tradingHTML;
+
+      // Upgrades
+      let upgradesHTML = "";
+      for (const type in upgradeData) {
+        const u = upgradeData[type];
+        const level = gameState.upgrades[type];
+        const cost = getUpgradeCost(type);
+        const disabled = controlsDisabled() || gameState.credits < cost ? 'disabled' : '';
+        upgradesHTML += `
+          <div class="upgrade-item">
+            <div class="upgrade-name">${u.icon} ${u.name}</div>
+            <div class="upgrade-level">LEVEL ${level}</div>
+            <div style="opacity:.8; margin:5px 0;">${u.description}</div>
+            <button ${disabled} onclick="buyUpgrade('${type}')">UPGRADE → ${formatCredits(cost)}</button>
+          </div>`;
+      }
+      document.getElementById("upgrades").innerHTML = upgradesHTML;
+
+      // Intel
+      let intelHTML = `
+        <p>🔍 Purchase market intelligence to reveal prices on other worlds before traveling.</p>
+        <p><strong>Intel Cost:</strong> ${formatCredits(getIntelCost())}</p>`;
+      for (const planet of planets) {
+        if (planet !== gameState.location) {
+          intelHTML += `<button ${controlsDisabled()?'disabled':''} onclick="buyIntel('${planet}')" style="margin:5px;">📡 ${planet}</button>`;
+        }
+      }
+      for (const planet in gameState.marketIntel) {
+        intelHTML += `<div class="market-intel"><strong>📊 ${planet.toUpperCase()} MARKET DATA</strong><br><br>`;
+        const planetPrices = gameState.marketIntel[planet];
+        for (const good in planetPrices) {
+          const here = prices[good];
+          const there = planetPrices[good];
+          const diff = there - here;
+          const cls = diff >= 0 ? "profit-positive" : "profit-negative";
+          const sign = diff >= 0 ? "+" : "−";
+          intelHTML += `${good}: ${formatCredits(there)} <span class="${cls}">(${sign}${formatCredits(Math.abs(diff)).replace(' ',' ')})</span><br>`;
+        }
+        intelHTML += `</div>`;
+      }
+      document.getElementById("intel").innerHTML = intelHTML;
+
+      // Travel
+      let travelHTML = `<div class="travel-grid">`;
+      for (const p of planets) {
+        if (p !== gameState.location) {
+          travelHTML += `<button class="travel-button" ${controlsDisabled()?'disabled':''} onclick="travel('${p}')">${p}</button>`;
+        }
+      }
+      travelHTML += `</div>`;
+      document.getElementById("travel").innerHTML = travelHTML;
+
+      // Restart button state
+      document.getElementById("restartBtn").disabled = false;
+    }
+
+    function endGame() {
+      gameState.isGameOver = true;
+      document.getElementById("travel").innerHTML = "<h2>🎯 MISSION COMPLETE</h2>";
+      addLog("═══ FINAL ASSESSMENT ═══");
+      addLog(`TOTAL CREDITS EARNED: ${formatCredits(gameState.credits)}`);
+
+      const c = gameState.credits;
+      if (c >= 15000) addLog("🏆 RANK: LEGENDARY TRADER - You've mastered the galaxy!");
+      else if (c >= 10000) addLog("🌟 RANK: EXPERT TRADER - Outstanding performance!");
+      else if (c >= 5000) addLog("⭐ RANK: SKILLED TRADER - Well done, captain!");
+      else if (c >= 3000) addLog("📈 RANK: TRADER - Solid profit margins!");
+      else if (c >= 1500) addLog("📊 RANK: APPRENTICE - Learning the ropes!");
+      else addLog("🔄 RANK: ROOKIE - Try again, captain!");
+
+      updateDisplay();
+    }
+
+    function restartGame() {
+      gameState = {
+        day: 1, credits: 1000, cargoSpace: 10, cargo: {}, maxDays: 30,
+        location: "Terra Prime", upgrades: { cargoExpansion:0, engines:0, shields:0, scanner:0 },
+        marketIntel:{}, isGameOver:false
+      };
+      document.getElementById("log").textContent = "";
+      startGame();
+    }
+
+    function startGame() {
+      generatePrices();
+      updateDisplay();
+      addLog("═══ GALACTIC HUSTLE INITIATED ═══");
+      addLog("🚀 COMMANDER BRIEFING:");
+      addLog(`• Mission Duration: ${gameState.maxDays} days`);
+      addLog(`• Starting Credits: ${formatCredits(gameState.credits)}`);
+      addLog("• New Systems: Bulk trading, market intel, ship upgrades");
+      addLog("💫 Good luck, trader. The galaxy awaits.");
+    }
+
+    // Init
+    startGame();
+  </script>
+</body>
+</html>

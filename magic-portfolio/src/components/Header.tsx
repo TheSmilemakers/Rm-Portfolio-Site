@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import { Fade, Flex, Line, ToggleButton } from "@once-ui-system/core";
 
-import { routes, display, person, about, blog, work, gallery } from "@/resources";
+import { routes, display, person, about, blog, work, gallery, game } from "@/resources";
 import { ThemeToggle } from "./ThemeToggle";
 import styles from "./Header.module.scss";
 
@@ -60,7 +60,7 @@ export const Header = () => {
         horizontal="center"
         data-border="rounded"
       >
-        <Flex paddingLeft="12" fillWidth vertical="center" textVariant="body-default-s">
+        <Flex paddingLeft="24" fillWidth vertical="center" textVariant="body-default-s">
           {display.location && <Flex hide="s">{person.location}</Flex>}
         </Flex>
         <Flex fillWidth horizontal="center">
@@ -147,6 +147,23 @@ export const Header = () => {
                   />
                 </>
               )}
+              {routes["/game"] && (
+                <>
+                  <ToggleButton
+                    className="s-flex-hide"
+                    prefixIcon="rocket"
+                    href="/game"
+                    label={game.label}
+                    selected={pathname === "/game"}
+                  />
+                  <ToggleButton
+                    className="s-flex-show"
+                    prefixIcon="rocket"
+                    href="/game"
+                    selected={pathname === "/game"}
+                  />
+                </>
+              )}
               {display.themeSwitcher && (
                 <>
                   <Line background="neutral-alpha-medium" vert maxHeight="24" />
@@ -158,7 +175,7 @@ export const Header = () => {
         </Flex>
         <Flex fillWidth horizontal="end" vertical="center">
           <Flex
-            paddingRight="12"
+            paddingRight="24"
             horizontal="end"
             vertical="center"
             textVariant="body-default-s"

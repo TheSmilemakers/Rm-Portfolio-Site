@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Test Instructions</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        code {
+            background: #f0f0f0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+        }
+        .section {
+            margin: 2rem 0;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        ul {
+            padding-left: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Portfolio Layout Testing Guide</h1>
+    
+    <div class="section">
+        <h2>1. Check Tech Stack Section</h2>
+        <p>Visit <code>http://localhost:3001</code> and scroll to the Technology Stack section.</p>
+        <ul>
+            <li>✓ Title should be centered</li>
+            <li>✓ Grid should have 5 columns on desktop, 3 on tablet, 2 on mobile</li>
+            <li>✓ Cards should have consistent height (120px)</li>
+            <li>✓ Icons should be 32px</li>
+            <li>✓ Proper padding on left and right</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>2. Check Project Cards</h2>
+        <p>Look at the Featured Projects section.</p>
+        <ul>
+            <li>✓ All cards should maintain 16:9 aspect ratio</li>
+            <li>✓ Images should fill the container properly</li>
+            <li>✓ Consistent padding around content</li>
+            <li>✓ TiltFx effect should work on hover</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>3. Check Overall Layout</h2>
+        <ul>
+            <li>✓ Content should have equal padding on left and right</li>
+            <li>✓ Maximum width of 1440px centered on large screens</li>
+            <li>✓ No horizontal scrolling</li>
+            <li>✓ Proper spacing between sections</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>4. Responsive Testing</h2>
+        <p>Use browser dev tools to test at these breakpoints:</p>
+        <ul>
+            <li>Mobile: 375px, 414px</li>
+            <li>Tablet: 768px, 1024px</li>
+            <li>Desktop: 1280px, 1440px, 1920px</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>5. Developer Tools Inspection</h2>
+        <p>Right-click on elements and inspect:</p>
+        <ul>
+            <li>Check computed styles for padding values</li>
+            <li>Verify grid layout is working correctly</li>
+            <li>Look for any CSS conflicts in the styles panel</li>
+            <li>Check if Once UI data attributes are applied</li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -26,7 +26,7 @@ import { AnimatedMetrics } from "@/components/custom/AnimatedMetrics";
 
 export default function Home() {
   return (
-    <Column fillWidth gap="xl">
+    <>
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -41,42 +41,46 @@ export default function Home() {
         }}
       />
       
-      {/* Hero Section - Enhanced with Once UI effects */}
+      {/* Hero Section - Full viewport width */}
       <Column 
         fillWidth 
-        gap="l"
-        className="hero-section"
-        paddingTop="80"
-        paddingBottom="xl"
-        vertical="center"
-        horizontal="center"
-        style={{
-          position: "relative",
-          overflow: "hidden",
-          minHeight: "calc(100vh - 160px)"
-        }}
+        position="relative"
+        style={{ minHeight: "100vh" }}
       >
-        {/* Interactive Particle Background - Replaces animated mesh */}
-        <Particle
-          fill
-          interactive
-          speed={3}
-          density={400}
-          color="brand-on-background-weak"
-          size="2"
-          opacity={80}
-          interactionRadius={120}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            zIndex: 0
-          }}
-        />
+        {/* Interactive Particle Background - Fills entire viewport */}
+        <div style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: 0
+        }}>
+          <Particle
+            fill
+            interactive
+            speed={3}
+            density={400}
+            color="brand-on-background-weak"
+            size="2"
+            opacity={80}
+            interactionRadius={120}
+          />
+        </div>
         
-        <Column fillWidth maxWidth="l" center paddingX="l" style={{ position: "relative", zIndex: 1 }}>
+        {/* Hero Content */}
+        <Column 
+          fillWidth 
+          gap="l"
+          paddingTop="104"
+          paddingBottom="xl"
+          paddingX="l"
+          className="hero-content"
+          vertical="center"
+          horizontal="center"
+          style={{ position: "relative", zIndex: 1, minHeight: "100vh" }}
+        >
+          <Column fillWidth maxWidth={800} gap="m" className="responsive-gap-l" center>
           {home.featured.display && (
             <RevealFx fillWidth center paddingTop="16" paddingBottom="32">
               <Badge 
@@ -126,14 +130,15 @@ export default function Home() {
             </Column>
           </RevealFx>
           
-          <RevealFx paddingTop="12" delay={0.4} center>
-            <Row gap="m">
+          <RevealFx paddingTop="12" delay={0.4} fillWidth center>
+            <Row gap="m" className="mobile-stack" horizontal="center" vertical="center">
               <Button
                 id="work"
                 href="/work"
                 variant="secondary"
                 size="l"
                 arrowIcon
+                className="mobile-button"
               >
                 View My Work
               </Button>
@@ -144,22 +149,27 @@ export default function Home() {
                 size="l"
                 weight="default"
                 arrowIcon
+                className="mobile-button"
               >
                 About Me
               </Button>
             </Row>
           </RevealFx>
+          </Column>
         </Column>
       </Column>
 
-      {/* Animated Metrics Section */}
-      <RevealFx translateY="16" delay={0.5}>
-        <Column fillWidth>
-          <AnimatedMetrics />
-        </Column>
-      </RevealFx>
+      {/* Main content with proper responsive padding */}
+      <Column fillWidth horizontal="center" paddingTop="xl">
+        <Column fillWidth maxWidth="xl" gap="xl" paddingX="xl">
+        {/* Animated Metrics Section */}
+        <RevealFx translateY="16" delay={0.5}>
+          <Column fillWidth>
+            <AnimatedMetrics />
+          </Column>
+        </RevealFx>
 
-      {/* Featured Projects */}
+        {/* Featured Projects */}
       <RevealFx translateY="16" delay={0.6}>
         <Column gap="l" fillWidth>
           <Heading as="h2" variant="display-strong-s" align="center">
@@ -188,40 +198,42 @@ export default function Home() {
         </RevealFx>
       )}
 
-      {/* CTA Section */}
-      <RevealFx translateY="16" delay={0.9}>
-        <Column fillWidth>
-          <Card 
-            fillWidth 
-            padding="xl" 
-            background="brand-alpha-weak"
-            className="cta-card glass-effect"
-            radius="l"
-            border="brand-alpha-medium"
-            horizontal="center"
-          >
-            <Column gap="l" center maxWidth="m">
-              <Column gap="m" center>
-                <Heading variant="display-strong-s" align="center">
-                  Let&apos;s Build Something Extraordinary
-                </Heading>
-                <Text variant="body-default-l" onBackground="neutral-weak" align="center" wrap="balance">
-                  Whether you&apos;re looking to revolutionize healthcare, automate complex systems, 
-                  or push the boundaries of AI – I&apos;m ready to help.
-                </Text>
+        {/* CTA Section */}
+        <RevealFx translateY="16" delay={0.9}>
+          <Column fillWidth>
+            <Card 
+              fillWidth 
+              padding="xl" 
+              background="brand-alpha-weak"
+              className="cta-card glass-effect"
+              radius="l"
+              border="brand-alpha-medium"
+              horizontal="center"
+            >
+              <Column gap="l" center maxWidth="m">
+                <Column gap="m" center>
+                  <Heading variant="display-strong-s" align="center">
+                    Let&apos;s Build Something Extraordinary
+                  </Heading>
+                  <Text variant="body-default-l" onBackground="neutral-weak" align="center" wrap="balance">
+                    Whether you&apos;re looking to revolutionize healthcare, automate complex systems, 
+                    or push the boundaries of AI – I&apos;m ready to help.
+                  </Text>
+                </Column>
+                <Button
+                  href="mailto:hello@rajanmaher.com"
+                  variant="secondary"
+                  size="l"
+                  className="button-3d"
+                >
+                  Start a Conversation
+                </Button>
               </Column>
-              <Button
-                href="mailto:hello@rajanmaher.com"
-                variant="secondary"
-                size="l"
-                className="button-3d"
-              >
-                Start a Conversation
-              </Button>
-            </Column>
-          </Card>
+            </Card>
+          </Column>
+        </RevealFx>
         </Column>
-      </RevealFx>
-    </Column>
+      </Column>
+    </>
   );
 }
