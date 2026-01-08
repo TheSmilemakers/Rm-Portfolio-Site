@@ -232,6 +232,11 @@ html {
   }
 }
 
+/* Particle glow effect */
+.particle-container canvas {
+  filter: drop-shadow(0 0 3px var(--brand-solid-strong));
+}
+
 /* Admin nav item hover */
 .admin-nav-item:hover {
   background-color: var(--neutral-background-weak) !important;

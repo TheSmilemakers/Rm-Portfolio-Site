@@ -58,18 +58,18 @@ export default function Home() {
             right: 0,
             bottom: 0,
             zIndex: 0,
-            pointerEvents: 'none'
+            pointerEvents: 'auto'
           }}
         >
           <Particle
             fill
             interactive
-            speed={3}
-            density={400}
-            color="brand-background-strong"
-            opacity={80}
-            size="2"
-            interactionRadius={120}
+            speed={2}
+            density={600}
+            color="brand-solid-strong"
+            opacity={100}
+            size="4"
+            interactionRadius={150}
           />
         </div>
         {/* Hero Content */}
