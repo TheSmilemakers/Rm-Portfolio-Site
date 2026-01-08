@@ -232,9 +232,9 @@ html {
   }
 }
 
-/* Particle glow effect */
+/* Particle styling - no filter to prevent glitching */
 .particle-container canvas {
-  filter: drop-shadow(0 0 3px var(--brand-solid-strong));
+  /* Removed glow filter to prevent visual glitching */
 }
 
 /* Admin nav item hover */

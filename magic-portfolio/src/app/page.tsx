@@ -64,12 +64,12 @@ export default function Home() {
           <Particle
             fill
             interactive
-            speed={2}
-            density={600}
-            color="brand-solid-strong"
-            opacity={100}
-            size="4"
-            interactionRadius={150}
+            speed={1}
+            density={300}
+            color="brand-on-background-strong"
+            opacity={80}
+            size="2"
+            interactionRadius={120}
           />
         </div>
         {/* Hero Content */}
