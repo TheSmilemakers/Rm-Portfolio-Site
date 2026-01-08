@@ -7,13 +7,15 @@ interface PostsProps {
     columns?: '1' | '2' | '3';
     thumbnail?: boolean;
     direction?: 'row' | 'column';
+    enhanced?: boolean;
 }
 
 export function Posts({
     range,
     columns = '1',
     thumbnail = false,
-    direction
+    direction,
+    enhanced = false
 }: PostsProps) {
     let allBlogs = getPosts(['src', 'app', 'blog', 'posts']);
 
@@ -34,7 +36,7 @@ export function Posts({
                 <Grid
                     columns={columns} mobileColumns="1"
                     fillWidth marginBottom="40" gap="12">
-                    {displayedBlogs.map((post) => (
+                    {displayedBlogs.map((post, index) => (
                         <Post
                             key={post.slug}
                             post={post}

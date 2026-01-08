@@ -11,6 +11,7 @@ const routes = {
   "/blog": true,
   "/gallery": true,
   "/game": true,
+  "/admin": true,  // Enable admin dashboard
 };
 
 const display = {
@@ -21,7 +22,9 @@ const display = {
 
 // Enable password protection on selected routes
 // Set password in the .env file, refer to .env.example
-const protectedRoutes = {};
+const protectedRoutes = {
+  "/admin": true,  // Protect admin dashboard
+};
 
 // Import and set fonts based on your preference
 import { Space_Grotesk } from "next/font/google";

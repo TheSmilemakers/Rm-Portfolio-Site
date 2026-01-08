@@ -8,3 +8,9 @@ export { Providers } from "@/components/Providers";
 export { ScrollToHash } from "@/components/ScrollToHash";
 export { ThemeToggle } from "@/components/ThemeToggle";
 export { CustomMDX } from "@/components/mdx";
+
+// Admin Components
+export { AdminNav } from "@/components/admin/AdminNav";
+export { BlogEditor } from "@/components/admin/BlogEditor";
+export { ProjectEditor } from "@/components/admin/ProjectEditor";
+export { ImageLibrary } from "@/components/admin/ImageLibrary";

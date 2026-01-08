@@ -1,66 +1,182 @@
+'use client';
+
 import { Metadata } from 'next';
-import { Column, RevealFx, Heading, Text, Fade, Row } from '@once-ui-system/core';
+import { useState, useEffect } from 'react';
+import { Column, RevealFx, Heading, Text, Row, Icon, Flex, Button, Badge, LetterFx } from '@once-ui-system/core';
 import { GameFrame } from '@/components/game/GameFrame';
 import { game, baseURL } from '@/resources';
-
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: game.title,
-    description: game.description,
-    openGraph: {
-      title: game.title,
-      description: game.description,
-      url: `${baseURL}${game.path}`,
-      images: [{
-        url: `${baseURL}/api/og/generate?title=${encodeURIComponent('Galactic Hustle')}&description=${encodeURIComponent('Space Trading Game')}`,
-        width: 1200,
-        height: 630,
-        alt: game.title,
-      }],
-    },
-  };
-}
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 export default function GamePage() {
+  const [orientation, setOrientation] = useState<'portrait' | 'landscape'>('portrait');
+  const [showRotatePrompt, setShowRotatePrompt] = useState(false);
+  const [viewportHeight, setViewportHeight] = useState('100vh');
+  const reducedMotion = useReducedMotion();
+  
+  useEffect(() => {
+    const checkOrientation = () => {
+      const isPortrait = window.innerHeight > window.innerWidth;
+      setOrientation(isPortrait ? 'portrait' : 'landscape');
+      // Only show rotate prompt on mobile devices
+      const isMobile = window.innerWidth < 768;
+      setShowRotatePrompt(isPortrait && isMobile);
+    };
+    
+    const updateHeight = () => {
+      // Account for mobile browser chrome
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      setViewportHeight(`${window.innerHeight}px`);
+    };
+    
+    checkOrientation();
+    updateHeight();
+    
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('resize', updateHeight);
+    window.addEventListener('orientationchange', checkOrientation);
+    
+    return () => {
+      window.removeEventListener('resize', checkOrientation);
+      window.removeEventListener('resize', updateHeight);
+      window.removeEventListener('orientationchange', checkOrientation);
+    };
+  }, []);
+  
   return (
-    <Column fillWidth align="center" padding="xl" gap="l" paddingBottom="104">
-      <Fade>
-        <Column maxWidth="xl" gap="m" align="center" paddingBottom="l">
+    <Column fillWidth align="center" style={{ minHeight: viewportHeight }}>
+      {/* Mobile-optimized header - hide on landscape mobile */}
+      <Column 
+        fillWidth 
+        gap="m" 
+        paddingX="l"
+        paddingTop="m"
+        paddingBottom="m"
+        style={{ 
+          display: orientation === 'landscape' && window.innerWidth < 768 ? 'none' : 'flex' 
+        }}
+      >
+        {reducedMotion ? (
+          <Heading 
+            variant="display-strong-l"
+            align="center"
+            style={{ fontSize: 'clamp(1.75rem, 5vw, 3rem)' }}
+          >
+            Galactic Hustle
+          </Heading>
+        ) : (
           <RevealFx>
-            <Heading variant="display-strong-xl" align="center">
-              Galactic Hustle
-            </Heading>
+            <LetterFx speed="medium" trigger="instant">
+              <Heading 
+                variant="display-strong-l"
+                align="center"
+                style={{ fontSize: 'clamp(1.75rem, 5vw, 3rem)' }}
+              >
+                Galactic Hustle
+              </Heading>
+            </LetterFx>
           </RevealFx>
+        )}
+        
+        {reducedMotion ? (
+          <Text 
+            variant="body-default-m" 
+            onBackground="neutral-medium"
+            align="center"
+            style={{ maxWidth: '600px', margin: '0 auto' }}
+          >
+            Navigate the cosmos as a space trader. Buy low, sell high, and build your empire.
+          </Text>
+        ) : (
           <RevealFx delay={0.1}>
-            <Text variant="body-default-l" onBackground="neutral-weak" align="center">
+            <Text 
+              variant="body-default-m" 
+              onBackground="neutral-medium"
+              align="center"
+              style={{ maxWidth: '600px', margin: '0 auto' }}
+            >
               Navigate the cosmos as a space trader. Buy low, sell high, and build your empire.
             </Text>
           </RevealFx>
+        )}
+        
+        {reducedMotion ? (
+          <Row gap="s" wrap horizontal="center">
+            <Badge background="accent-alpha-weak">Strategy</Badge>
+            <Badge background="brand-alpha-weak">30 Days</Badge>
+            <Badge background="success-alpha-weak">Trading</Badge>
+          </Row>
+        ) : (
           <RevealFx delay={0.2}>
-            <Row gap="m" align="center">
-              <Text variant="label-default-s" onBackground="neutral-weak">
-                🎮 Strategy Game
-              </Text>
-              <Text variant="label-default-s" onBackground="neutral-weak">
-                •
-              </Text>
-              <Text variant="label-default-s" onBackground="neutral-weak">
-                🚀 30-Day Missions
-              </Text>
-              <Text variant="label-default-s" onBackground="neutral-weak">
-                •
-              </Text>
-              <Text variant="label-default-s" onBackground="neutral-weak">
-                💰 Trading Simulation
-              </Text>
+            <Row gap="s" wrap horizontal="center">
+              <Badge background="accent-alpha-weak">Strategy</Badge>
+              <Badge background="brand-alpha-weak">30 Days</Badge>
+              <Badge background="success-alpha-weak">Trading</Badge>
             </Row>
           </RevealFx>
-        </Column>
-      </Fade>
+        )}
+      </Column>
       
-      <Fade delay={0.3}>
+      {/* Game container with mobile optimization */}
+      <Column fillWidth flex={1} position="relative">
+        {showRotatePrompt && (
+          <Flex
+            position="absolute"
+            fillWidth
+            fillHeight
+            background="surface"
+            style={{ zIndex: 100 }}
+            horizontal="center"
+            vertical="center"
+          >
+            <Column gap="m" align="center" padding="xl">
+              <Icon name="rotate" size="xl" onBackground="brand-medium" />
+              <Heading variant="heading-strong-l">
+                Please rotate your device
+              </Heading>
+              <Text variant="body-default-m" onBackground="neutral-medium" align="center">
+                This game is best played in landscape mode for the full experience
+              </Text>
+              <Button
+                variant="secondary"
+                size="m"
+                onClick={() => setShowRotatePrompt(false)}
+              >
+                Play Anyway
+              </Button>
+            </Column>
+          </Flex>
+        )}
+        
         <GameFrame />
-      </Fade>
+      </Column>
+      
+      {/* Mobile controls - show only on portrait mobile */}
+      {orientation === 'portrait' && window.innerWidth < 768 && (
+        <Row 
+          fillWidth 
+          gap="m" 
+          padding="m"
+          style={{ paddingBottom: 'calc(16px + env(safe-area-inset-bottom))' }}
+        >
+          <Button 
+            fillWidth 
+            variant="primary"
+            size="l"
+            style={{ minHeight: '48px' }}
+          >
+            Play Game
+          </Button>
+          <Button 
+            fillWidth 
+            variant="secondary"
+            size="l"
+            style={{ minHeight: '48px' }}
+          >
+            Instructions
+          </Button>
+        </Row>
+      )}
     </Column>
   );
 }

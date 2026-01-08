@@ -4,9 +4,10 @@ import { ProjectCard } from "@/components";
 
 interface ProjectsProps {
   range?: [number, number?];
+  enhanced?: boolean;
 }
 
-export function Projects({ range }: ProjectsProps) {
+export function Projects({ range, enhanced = false }: ProjectsProps) {
   let allProjects = getPosts(["src", "app", "work", "projects"]);
 
   const sortedProjects = allProjects.sort((a, b) => {
@@ -29,8 +30,8 @@ export function Projects({ range }: ProjectsProps) {
       {displayedProjects.map((post, index) => (
         <RevealFx
           key={post.slug}
-          translateY="24"
-          delay={index * 0.1}
+          translateY={enhanced ? "16" : "24"}
+          delay={enhanced ? index * 0.05 : index * 0.1}
         >
           <ProjectCard
             priority={index < 2}

@@ -64,12 +64,8 @@
   background: rgba(var(--surface-background-rgb), 0.8);
   backdrop-filter: blur(8px);
   border-radius: var(--radius-m);
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.2s ease;
-  
-  .gameWrapper:hover & {
-    opacity: 1;
-  }
 }
 
 // Responsive adjustments

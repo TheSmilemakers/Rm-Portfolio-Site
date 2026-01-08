@@ -9,7 +9,7 @@ const defaultConfig = {
   src: '/games/galactic-hustle/index.html',
   title: 'Galactic Hustle',
   maxWidth: '1200px',
-  minHeight: '800px',
+  minHeight: typeof window !== 'undefined' && window.innerWidth < 768 ? '400px' : '800px',
   loading: 'eager' as const,
 };
 
@@ -77,7 +77,6 @@ export const GameFrame: React.FC<GameFrameProps> = ({
           className={styles.storylineCard}
           background="surface"
           align="center"
-          justify="center"
           style={{ minHeight: gameConfig.minHeight }}
         >
           <Column maxWidth="m" gap="l" align="center">
@@ -109,7 +108,7 @@ export const GameFrame: React.FC<GameFrameProps> = ({
                   align="center"
                   className={styles.storyText}
                 >
-                  You've inherited a small cargo ship from your uncle, 
+                  You&apos;ve inherited a small cargo ship from your uncle, 
                   a legendary trader who vanished near the Zorath system.
                 </Text>
               </RevealFx>
@@ -189,7 +188,6 @@ export const GameFrame: React.FC<GameFrameProps> = ({
           <Flex 
             fillWidth 
             align="center" 
-            justify="center" 
             style={{ minHeight: gameConfig.minHeight }}
             className={styles.loadingContainer}
           >
@@ -206,7 +204,6 @@ export const GameFrame: React.FC<GameFrameProps> = ({
           <Flex 
             fillWidth 
             align="center" 
-            justify="center" 
             style={{ minHeight: '400px' }}
           >
             <Column align="center" gap="m">
@@ -247,10 +244,11 @@ export const GameFrame: React.FC<GameFrameProps> = ({
             <Flex className={styles.gameControls} padding="s" gap="s">
               <Button
                 label="Fullscreen"
-                size="s"
+                size="m"
                 variant="tertiary"
                 prefixIcon="expand"
                 onClick={handleFullscreen}
+                style={{ minWidth: '48px', minHeight: '48px' }}
               />
             </Flex>
           )}

@@ -93,6 +93,14 @@ export interface Gallery {
   images: GalleryImage[];
 }
 
+export interface Game {
+  path: string;
+  label: string;
+  title: string;
+  description: string;
+  image: string;
+}
+
 export declare const person: Person;
 export declare const social: SocialItem[];
 export declare const newsletter: Newsletter;
@@ -101,3 +109,4 @@ export declare const about: About;
 export declare const blog: Blog;
 export declare const work: Work;
 export declare const gallery: Gallery;
+export declare const game: Game;

@@ -4,7 +4,7 @@ import '@/resources/custom.css'
 
 import classNames from "classnames";
 
-import { Background, Column, Flex, Meta, opacity, SpacingToken } from "@once-ui-system/core";
+import { Background, Column, Flex, Meta, opacity, SpacingToken, Particle } from "@once-ui-system/core";
 import { Footer, Header, RouteGuard, Providers } from '@/components';
 import { baseURL, effects, fonts, style, dataStyle, home } from '@/resources';
 
@@ -103,8 +103,8 @@ export default async function RootLayout({
         <meta name="theme-color" content="#000000" />
       </head>
       <Providers>
-        <Column as="body" background="page" fillWidth style={{minHeight: "100vh", position: "relative"}} margin="0" padding="0">
-          {/* Type-safe effects for Background component - positioned absolutely */}
+        <Column as="body" background="page" fillWidth style={{minHeight: "100vh", height: "100%", position: "relative"}} margin="0" padding="0">
+          {/* Type-safe effects for Background component - absolute positioning with full height */}
           <div style={{position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 0}}>
             {(() => {
               const typedEffects = {
@@ -116,15 +116,17 @@ export default async function RootLayout({
               };
               
               return (
-                <Background
-                  gradient={typedEffects.gradient}
-                  dots={typedEffects.dots}
-                  grid={typedEffects.grid}
-                  lines={typedEffects.lines}
-                  mask={typedEffects.mask}
-                  data-viz-style={dataStyle.variant}
-                  data-viz-color-mode={dataStyle.mode}
-                />
+                <>
+                  <Background
+                    gradient={typedEffects.gradient}
+                    dots={typedEffects.dots}
+                    grid={typedEffects.grid}
+                    lines={typedEffects.lines}
+                    mask={typedEffects.mask}
+                    data-viz-style={dataStyle.variant}
+                    data-viz-color-mode={dataStyle.mode}
+                  />
+                </>
               );
             })()}
           </div>

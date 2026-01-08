@@ -44,11 +44,12 @@ export default TimeDisplay;
 
 export const Header = () => {
   const pathname = usePathname() ?? "";
+  const isGamePage = pathname.includes("/game");
 
   return (
     <>
-      <Fade hide="s" fillWidth position="fixed" height="80" zIndex={9} />
-      <Fade show="s" fillWidth position="fixed" bottom="0" to="top" height="80" zIndex={9} />
+      {!isGamePage && <Fade hide="s" fillWidth position="fixed" height="80" zIndex={9} />}
+      {!isGamePage && <Fade show="s" fillWidth position="fixed" bottom="0" to="top" height="80" zIndex={9} />}
       <Flex
         fitHeight
         position="unset"
@@ -74,7 +75,7 @@ export const Header = () => {
             zIndex={1}
             className="glass-effect"
           >
-            <Flex gap="4" vertical="center" textVariant="body-default-s" suppressHydrationWarning>
+            <Flex gap="12" vertical="center" textVariant="body-default-s" suppressHydrationWarning>
               {routes["/"] && (
                 <ToggleButton prefixIcon="home" href="/" selected={pathname === "/"} />
               )}
@@ -93,6 +94,8 @@ export const Header = () => {
                     prefixIcon="person"
                     href="/about"
                     selected={pathname === "/about"}
+                    size="s"
+                    aria-label={about.label}
                   />
                 </>
               )}
@@ -110,6 +113,8 @@ export const Header = () => {
                     prefixIcon="grid"
                     href="/work"
                     selected={pathname.startsWith("/work")}
+                    size="s"
+                    aria-label={work.label}
                   />
                 </>
               )}
@@ -127,6 +132,8 @@ export const Header = () => {
                     prefixIcon="book"
                     href="/blog"
                     selected={pathname.startsWith("/blog")}
+                    size="s"
+                    aria-label={blog.label}
                   />
                 </>
               )}
@@ -144,6 +151,8 @@ export const Header = () => {
                     prefixIcon="gallery"
                     href="/gallery"
                     selected={pathname.startsWith("/gallery")}
+                    size="s"
+                    aria-label={gallery.label}
                   />
                 </>
               )}
@@ -161,6 +170,8 @@ export const Header = () => {
                     prefixIcon="rocket"
                     href="/game"
                     selected={pathname === "/game"}
+                    size="s"
+                    aria-label={game.label}
                   />
                 </>
               )}
