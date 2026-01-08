@@ -8,7 +8,7 @@ const person = {
   },
   role: "Digital Craftsman",
   avatar: "/images/rajan-avatar.jpg", // Updated to use processed JPG
-  email: "hello@rajanmaher.com",
+  email: "rajan@thesmilemakers.org",
   location: "Europe/London",
   languages: ["English"], 
 };
@@ -43,17 +43,17 @@ const home = {
   label: "Home",
   title: `${person.name} - Digital Craftsman`,
   description: `Building systems that heal, automate & inspire. AI healthcare innovation, trading algorithms, and intelligent automation.`,
-  headline: <>Building systems that<br />heal, automate & inspire</>,
+  headline: <>Rajan Maher – Digital Craftsman</>,
   featured: {
     display: true,
-    title: <>Latest: <strong className="ml-4">AI Healthcare Platform</strong></>,
-    href: "/work/healthcare-ai-platform",
+    title: <>Latest: <strong className="ml-4">CFlow – Enterprise Workforce Platform</strong></>,
+    href: "/work/cflow-workforce-platform",
   },
   subline: (
     <>
-      I architect intelligent solutions at the intersection of artificial intelligence 
-      and human experience. From healthcare innovation to trading algorithms, 
-      I craft technology that transforms industries.
+      I build intelligent systems at the intersection of healthcare, technology, and enterprise. 
+      From running dental practices and medical ventures to designing AI-powered platforms, 
+      my work transforms complexity into clarity.
     </>
   ),
 };
@@ -76,100 +76,66 @@ const about = {
   },
   intro: {
     display: true,
-    title: "Introduction",
+    title: "About Me",
     description: (
       <>
-        I&apos;m a digital craftsman who bridges the gap between cutting-edge technology and real-world impact. 
-        My work spans AI-driven healthcare solutions, sophisticated trading algorithms, and intelligent automation systems 
-        that transform how businesses operate.
+        I am a dentist, entrepreneur, and digital craftsman with over 20 years of experience creating impact across healthcare and technology. 
+        My career began in clinical dentistry, where I mastered implants, orthodontics, aesthetics, and restorative care while owning and managing successful practices in London.
+        <br /><br />
+        As a healthcare entrepreneur, I launched ventures ranging from private practices to diagnostic services and medical tourism, 
+        including the establishment of accredited healthcare testing during the Covid-19 era and The Smile Makers, 
+        a medical tourism platform bridging UK patients with leading international clinics. 
+        These experiences sharpened my skills in compliance, governance, operations, and patient-centric service design.
+        <br /><br />
+        In 2025, I expanded into artificial intelligence and automation. My projects now span AI-powered healthcare assistants, 
+        SaaS platforms for GP compliance and rota management, cloud-hosted LLM agent systems, and algorithmic trading models. 
+        By combining clinical insight, business leadership, and technical expertise, I create systems that not only scale 
+        but also improve patient care, business efficiency, and decision-making.
       </>
     ),
   },
   work: {
-    display: true,
-    title: "Work Experience",
-    experiences: [
-      {
-        company: "Independent Consultant",
-        timeframe: "2022 - Present",
-        role: "AI & Automation Specialist",
-        achievements: [
-          <>
-            Built an AI-powered healthcare platform that reduced diagnosis time by 40% 
-            while maintaining 98% accuracy across multiple medical specialties.
-          </>,
-          <>
-            Developed cloud-hosted N8N agent systems with hierarchical LLM orchestration, 
-            featuring RAG knowledge bases for complex task automation.
-          </>,
-          <>
-            Created trading algorithms that consistently outperform market indices by 15-20% 
-            through advanced pattern recognition and risk management.
-          </>,
-        ],
-        images: [], // Remove broken image references for now
-      },
-      {
-        company: "Previous Role",
-        timeframe: "2018 - 2022",
-        role: "Full Stack Developer",
-        achievements: [
-          <>
-            Led development of enterprise automation solutions serving 10,000+ users daily.
-          </>,
-          <>
-            Architected microservices infrastructure reducing system latency by 60%.
-          </>,
-        ],
-        images: [],
-      },
-    ],
+    display: false, // Disable work experience section as it's covered in intro
   },
   studies: {
-    display: true,
-    title: "Education",
-    institutions: [
-      {
-        name: "Computer Science Degree",
-        description: <>Specialized in AI/ML and distributed systems.</>,
-      },
-      {
-        name: "Continuous Learning",
-        description: <>Always exploring emerging technologies in AI, blockchain, and quantum computing.</>,
-      },
-    ],
+    display: false, // Education is covered in the intro
   },
   technical: {
     display: true,
-    title: "Technical Excellence",
+    title: "Skills",
     skills: [
       {
-        title: "AI & Machine Learning",
+        title: "Healthcare & Dentistry",
         description: <>
-          Expert in LLMs, RAG systems, computer vision, and neural networks. 
-          Building production AI systems with OpenAI, Anthropic, and custom models.
+          Implants, orthodontics, aesthetics, compliance, practice management.
         </>,
-        images: [], // Remove broken image references for now
+        images: [],
       },
       {
-        title: "Full Stack Development",
+        title: "AI & Automation",
         description: <>
-          Next.js, React, Node.js, Python, PostgreSQL, Redis. 
-          Building scalable applications with 99.9% uptime.
+          LLMs, RAG systems, workflow automation, agent orchestration.
+        </>,
+        images: [],
+      },
+      {
+        title: "Full-Stack Development",
+        description: <>
+          React, Next.js, Node.js, Python, PostgreSQL, Supabase.
         </>,
         images: [],
       },
       {
         title: "Cloud & DevOps",
         description: <>
-          AWS, Vercel, Docker, Kubernetes. Architecting infrastructure that scales to millions.
+          AWS, Vercel, Docker, Kubernetes.
         </>,
         images: [],
       },
       {
-        title: "Trading & Finance",
+        title: "Finance & Trading",
         description: <>
-          Quantitative analysis, algorithmic trading, risk management systems.
+          Quantitative analysis, algorithmic trading, risk management.
         </>,
         images: [],
       },

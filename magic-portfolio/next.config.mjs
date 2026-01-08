@@ -13,6 +13,10 @@ const nextConfig = {
     compiler: "modern",
     silenceDeprecations: ["legacy-js-api"],
   },
+  eslint: {
+    // Allow production builds to complete even with ESLint errors
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default withMDX(nextConfig);

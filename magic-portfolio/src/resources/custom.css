@@ -1,19 +1,60 @@
 /* Essential Once UI Overrides Only */
 
-/* Gradient text for hero - Using CSS variables */
+/* Gradient text for hero - Multiple approaches for maximum compatibility */
 .gradient-text {
-  background: linear-gradient(135deg, var(--brand-400) 0%, var(--accent-400) 100%);
+  /* Fallback gradient with fixed colors */
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  /* Try various Once UI color token patterns */
+  background: linear-gradient(135deg, 
+    var(--yellow-solid-strong, var(--brand-solid-strong, var(--yellow-600, #FFD700))) 0%, 
+    var(--orange-solid-strong, var(--accent-solid-strong, var(--orange-600, #FFA500))) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
   font-weight: 800;
+  display: inline-block; /* Required for gradient effect */
+  /* Override any text color from Once UI */
+  color: transparent !important;
+  /* Ensure text is visible during loading */
+  position: relative;
 }
 
-[data-theme="light"] .gradient-text {
-  background: linear-gradient(135deg, var(--brand-600) 0%, var(--accent-600) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Maximum specificity to override Once UI Heading component */
+.hero-title.gradient-text,
+.hero-content .gradient-text,
+h1.gradient-text,
+.gradient-text[class*="variant"],
+.gradient-text[class*="display"],
+[class*="heading"].gradient-text {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  -moz-background-clip: text !important;
+  -moz-text-fill-color: transparent !important;
+  color: transparent !important;
+}
+
+/* Light theme gradient */
+[data-theme="light"] .gradient-text,
+[data-theme="light"] .hero-title.gradient-text,
+[data-theme="light"] h1.gradient-text {
+  background: linear-gradient(135deg, #FFB700 0%, #FF8C00 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* Webkit-specific fixes */
+@supports (-webkit-background-clip: text) {
+  .gradient-text {
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
 }
 
 /* Loading animation - Used by AnimatedMetrics */
@@ -113,4 +154,85 @@ html {
   .hero-subtitle {
     font-size: clamp(1rem, 4vw, 1.25rem);
   }
+}
+
+/* Hover lift effect for cards */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* CTA card enhancement */
+.cta-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glass effect enhancement */
+.glass-effect {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Admin textarea styles */
+.admin-textarea {
+  width: 100%;
+  padding: var(--static-space-m, 12px);
+  background: var(--surface-background, #1a1a1a);
+  border: 1px solid var(--neutral-border-medium, #333);
+  border-radius: var(--radius-m, 8px);
+  color: var(--neutral-on-background-strong, #fff);
+  font-size: 14px;
+  line-height: 1.5;
+  resize: vertical;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-textarea:focus {
+  outline: none;
+  border-color: var(--brand-solid-strong, #FFD700);
+  box-shadow: 0 0 0 2px var(--brand-alpha-weak, rgba(255, 215, 0, 0.2));
+}
+
+.admin-textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-textarea::placeholder {
+  color: var(--neutral-on-background-weak, #666);
+}
+
+.admin-textarea-code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 13px;
+}
+
+/* Admin checkbox styles */
+.admin-checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--brand-solid-strong, #FFD700);
+  cursor: pointer;
+}
+
+.admin-checkbox:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Reduced motion - hide particle animations */
+@media (prefers-reduced-motion: reduce) {
+  .particle-container {
+    display: none !important;
+  }
+}
+
+/* Admin nav item hover */
+.admin-nav-item:hover {
+  background-color: var(--neutral-background-weak) !important;
 }

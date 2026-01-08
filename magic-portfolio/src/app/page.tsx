@@ -1,21 +1,21 @@
 import React from "react";
-import { 
-  Heading, 
-  Flex, 
-  Text, 
-  Button, 
-  Avatar, 
-  RevealFx, 
-  Column, 
-  Badge, 
-  Row, 
-  Meta, 
+import {
+  Heading,
+  Flex,
+  Text,
+  Button,
+  Avatar,
+  RevealFx,
+  Column,
+  Badge,
+  Row,
+  Meta,
   Schema,
   Grid,
   Card,
   LetterFx,
-  Particle,
-  Background
+  Background,
+  Particle
 } from "@once-ui-system/core";
 import { home, about, person, newsletter, baseURL, routes } from "@/resources";
 import { Mailchimp } from "@/components";
@@ -25,6 +25,7 @@ import { TechStack } from "@/components/custom/TechStack";
 import { AnimatedMetrics } from "@/components/custom/AnimatedMetrics";
 
 export default function Home() {
+
   return (
     <>
       <Schema
@@ -47,27 +48,30 @@ export default function Home() {
         position="relative"
         style={{ minHeight: "100vh" }}
       >
-        {/* Interactive Particle Background - Fills entire viewport */}
-        <div style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 0
-        }}>
+        {/* Particle Background - hidden via CSS when reduced motion is preferred */}
+        <div
+          className="particle-container"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 0,
+            pointerEvents: 'none'
+          }}
+        >
           <Particle
             fill
             interactive
             speed={3}
             density={400}
-            color="brand-on-background-weak"
-            size="2"
+            color="brand-background-strong"
             opacity={80}
+            size="2"
             interactionRadius={120}
           />
         </div>
-        
         {/* Hero Content */}
         <Column 
           fillWidth 
@@ -100,19 +104,22 @@ export default function Home() {
           
           <RevealFx translateY="4" fillWidth center paddingBottom="16">
             <Column fillWidth center>
-              <LetterFx 
-                speed="medium" 
-                trigger="instant"
+              <Heading 
+                wrap="balance" 
+                variant="display-strong-l"
+                className="gradient-text hero-title"
+                align="center"
+                style={{ 
+                  background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  color: 'transparent',
+                  display: 'inline-block'
+                }}
               >
-                <Heading 
-                  wrap="balance" 
-                  variant="display-strong-l"
-                  className="gradient-text hero-title"
-                  align="center"
-                >
-                  {home.headline}
-                </Heading>
-              </LetterFx>
+                {home.headline}
+              </Heading>
             </Column>
           </RevealFx>
           
@@ -140,18 +147,18 @@ export default function Home() {
                 arrowIcon
                 className="mobile-button"
               >
-                View My Work
+                Explore My Work
               </Button>
               <Button
-                id="about"
-                href={about.path}
+                id="contact"
+                href="mailto:rajan@thesmilemakers.org"
                 variant="secondary"
                 size="l"
                 weight="default"
                 arrowIcon
                 className="mobile-button"
               >
-                About Me
+                Start a Conversation
               </Button>
             </Row>
           </RevealFx>
@@ -221,7 +228,7 @@ export default function Home() {
                   </Text>
                 </Column>
                 <Button
-                  href="mailto:hello@rajanmaher.com"
+                  href="mailto:rajan@thesmilemakers.org"
                   variant="secondary"
                   size="l"
                   className="button-3d"

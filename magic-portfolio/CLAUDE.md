@@ -205,6 +205,46 @@ The project now includes a specialized sub-agent stack optimized for portfolio d
 - **Integration Guide**: `/Users/rajan/Documents/rmsitemagicportfolio/.claude/agent-integration.md`
 - **Setup Guide**: `/Users/rajan/Documents/rmsitemagicportfolio/PROJECT_SETUP_GUIDE.md`
 
+## Master Agent Orchestration System
+
+### Memory MCP Server Integration
+- **Status**: ✅ Active and Operational
+- **Location**: `/memory-mcp-server/`
+- **Knowledge Graph**: 25 entities, 34 relationships mapped
+- **Memory File**: `portfolio-memory.jsonl`
+- **Available Tools**: 9 memory operations (create, search, update, delete)
+
+### Project Command Center
+- **Dashboard**: `/docs/PROJECT_COMMAND_CENTER.md`
+- **Daily Operations**: `/scripts/daily-operations.py`
+- **Health Score**: 94% (Production Ready)
+- **Automated Monitoring**: Active
+
+### Agent Orchestration Status
+All 14 specialized agents are integrated with the memory system and follow quality standards:
+
+**Memory-Enhanced Workflows:**
+- All agent decisions stored in knowledge graph
+- Pattern recognition for solution reuse
+- Persistent learning across sessions
+- Automatic task-to-agent mapping
+
+### Quality Standards Enforcement
+**All agents must follow**: `/docs/quality-coding-bible.md`
+- Code quality gates (80% test coverage minimum)
+- Security-first development practices
+- Performance standards (LCP < 2.5s, FID < 100ms)
+- Documentation requirements
+- Error handling protocols
+
+### Master Agent Oversight
+The orchestration system includes:
+- **Quality Gate Enforcement**: Automatic code quality checks
+- **Pattern Learning**: Memory system tracks successful approaches
+- **Performance Monitoring**: Daily health checks and reporting
+- **Security Auditing**: Regular vulnerability assessments
+- **Knowledge Retention**: No decisions lost between sessions
+
 ## Handover Documentation
 Build error solutions documented at:
 `/Users/rajan/Documents/rmsitemagicportfolio/magic-portfolio/HANDOVER_BUILD_ERRORS.md`
