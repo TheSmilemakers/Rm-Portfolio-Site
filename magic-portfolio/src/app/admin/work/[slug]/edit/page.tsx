@@ -4,6 +4,9 @@ import matter from "gray-matter";
 import { notFound } from "next/navigation";
 import { ProjectEditor } from "@/components/admin/ProjectEditor";
 
+// Force dynamic rendering for edit pages (no static generation)
+export const dynamic = "force-dynamic";
+
 interface EditProjectProps {
   params: Promise<{
     slug: string;

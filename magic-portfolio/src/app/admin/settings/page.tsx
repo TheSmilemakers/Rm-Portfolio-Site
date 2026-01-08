@@ -1,6 +1,9 @@
 import { Column, Row, Heading, Text, Card, Badge } from "@once-ui-system/core";
 import { person, social, home, about, blog, work } from "@/resources";
 
+// Force dynamic rendering
+export const dynamic = "force-dynamic";
+
 export default function SettingsManagement() {
   return (
     <Column fillWidth gap="l" maxWidth="xl">

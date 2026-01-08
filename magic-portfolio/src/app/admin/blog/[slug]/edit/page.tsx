@@ -4,6 +4,9 @@ import matter from "gray-matter";
 import { notFound } from "next/navigation";
 import { BlogEditor } from "@/components/admin/BlogEditor";
 
+// Force dynamic rendering for edit pages (no static generation)
+export const dynamic = "force-dynamic";
+
 interface EditBlogPostProps {
   params: Promise<{
     slug: string;

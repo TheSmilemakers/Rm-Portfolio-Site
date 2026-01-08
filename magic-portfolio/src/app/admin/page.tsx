@@ -1,6 +1,9 @@
 import { promises as fs } from "fs";
 import path from "path";
 import Link from "next/link";
+
+// Force dynamic rendering for admin dashboard
+export const dynamic = "force-dynamic";
 import { Column, Row, Heading, Text, Card, Button, Icon, Flex } from "@once-ui-system/core";
 
 // Helper function to count MDX files

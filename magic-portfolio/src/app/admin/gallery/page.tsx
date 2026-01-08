@@ -2,6 +2,9 @@ import Link from "next/link";
 import { Column, Row, Heading, Text, Card, Button, Icon } from "@once-ui-system/core";
 import { gallery } from "@/resources";
 
+// Force dynamic rendering
+export const dynamic = "force-dynamic";
+
 export default function GalleryManagement() {
   const totalImages = gallery.images?.length || 0;
 

@@ -2,6 +2,9 @@ import { promises as fs } from "fs";
 import path from "path";
 import Link from "next/link";
 import matter from "gray-matter";
+
+// Force dynamic rendering for blog management
+export const dynamic = "force-dynamic";
 import { Column, Row, Heading, Button, Card, Text, Flex, Icon } from "@once-ui-system/core";
 
 interface BlogPost {
